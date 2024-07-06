@@ -1,0 +1,3 @@
+find a way to monitor what files are open
+stop them executing unless prompt is accepted
+similar to screen time functions on iphone.
