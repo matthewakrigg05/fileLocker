@@ -1,5 +1,8 @@
+import filesToLock
+
+
 def main():
-    print("this will be main file")
+    filesToLock.checkForTxt()
 
 
 main()
