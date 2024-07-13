@@ -1,4 +1,4 @@
-import filesToLock
+import checkFiles
 
 
 def main():
