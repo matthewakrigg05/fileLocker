@@ -1,3 +1,2 @@
-find a way to monitor what files are open
-stop them executing unless prompt is accepted
-similar to screen time functions on iphone.
+process:
+check for locked files -> add files to lock -> run it -> stop them being executed (event listener? monitor task manager?)

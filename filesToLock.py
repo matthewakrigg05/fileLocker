@@ -1,5 +1,6 @@
 import os
 
+# check if the file containing names of lockable files exists
 def checkForTxt():
     filePath = './lockedFiles.txt'
 
