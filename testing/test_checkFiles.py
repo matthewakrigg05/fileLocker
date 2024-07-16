@@ -1,7 +1,13 @@
 from unittest import TestCase
-class Test(TestCase):
-    def test_check_for_txt(self):
-        self.fail()
+import checkFiles
 
-    def test_check_if_process_running(self):
+
+class Test(TestCase):
+    def test_checkForTxt(self):
+        if not checkFiles.checkForTxt():
+            print("File exists")
+        else:
+            print("File created")
+
+    def test_checkIfProcessRunning(self):
         self.fail()

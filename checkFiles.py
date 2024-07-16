@@ -7,11 +7,11 @@ def checkForTxt():
     filePath = './lockedFiles.txt'
 
     if not os.path.exists(filePath):
-        open("lockedFiles.txt", 'w')
-        print("TRUE")
+        file = open("lockedFiles.txt", 'w')
+        file.close()
+        return True
     else:
-        print("FALSE, file exists already")
-
+        return False
 def checkIfProcessRunning(program):
     n = 0
     prog = [line.split() for line in subprocess.check_output("tasklist").splitlines()]
