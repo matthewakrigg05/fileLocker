@@ -12,6 +12,8 @@ def checkForTxt():
         return True
     else:
         return False
+
+
 def checkIfProcessRunning(program):
     n = 0
     prog = [line.split() for line in subprocess.check_output("tasklist").splitlines()]
@@ -23,3 +25,13 @@ def checkIfProcessRunning(program):
         return True
     else:
         return False
+
+
+def lockedFilesContent():
+    file = open("lockedFiles.txt", 'r')
+    fileContents = []
+
+    for items in file:
+        fileContents.add(items)
+
+    return fileContents

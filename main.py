@@ -2,7 +2,12 @@ import checkFiles
 
 
 def main():
-    filesToLock.checkForTxt()
+    script_running = True
+
+    checkFiles.checkForTxt()
+
+    while script_running:
+        pass
 
 
 main()
