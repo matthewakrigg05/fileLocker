@@ -7,7 +7,7 @@ def checkForTxt():
     filePath = './lockedFiles.txt'
 
     if not os.path.exists(filePath):
-        file = open("lockedFiles.txt", 'w')
+        file = open("./lockedFiles.txt", 'w')
         file.close()
         return True
     else:
@@ -28,7 +28,7 @@ def checkIfProcessRunning(program):
 
 
 def lockedFilesContent():
-    file = open("lockedFiles.txt", 'r')
+    file = open("./lockedFiles.txt", 'r')
     fileContents = []
 
     for items in file:
