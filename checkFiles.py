@@ -27,6 +27,7 @@ def lockedFilesContent():
     Lines = file.readlines()
 
     for line in Lines:
+        line.strip()
         fileContents.append(line)
 
     return fileContents

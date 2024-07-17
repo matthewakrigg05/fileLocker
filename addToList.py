@@ -6,7 +6,7 @@ def addToList():
     itemAlreadyInFile = False
 
     fileContents = lockedFilesContent()
-    fileContentsString = ", ".join(fileContents)
+    fileContentsString = ", ".join(fileContents).replace('\n', '')
 
     if not fileContents:
         print("You currently have no items in your file")
@@ -18,7 +18,6 @@ def addToList():
 
     for item in fileContents:
         if item == fileToAdd:
-
             itemAlreadyInFile = True
             break
         else:
