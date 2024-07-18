@@ -27,7 +27,7 @@ def main():
             manipulateList.addToList()
 
         elif ans == "3":
-            pass
+            manipulateList.removeItem()
 
         elif ans == "4":
             manipulateList.clearList()
