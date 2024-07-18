@@ -1,15 +1,16 @@
 from checkFiles import lockedFilesContent
 
+
 def clearList():
     file = open("./lockedFiles.txt", 'w')
     file.close()
+
 
 def addToList():
     file = open("./lockedFiles.txt", 'a')
     itemAlreadyInFile = False
 
     fileContents = lockedFilesContent()
-    fileContentsString = ", ".join(fileContents).replace('\n', '')
 
     fileToAdd = input(
         "Please write the .exe (as it would appear in the file explorer) name of the app you wish to add.\n")
@@ -20,7 +21,7 @@ def addToList():
             itemAlreadyInFile = True
             break
 
-    if itemAlreadyInFile == True:
+    if itemAlreadyInFile:
         print("This item is already in this file!")
     elif not fileContents:
         file.write(fileToAdd + "\n")

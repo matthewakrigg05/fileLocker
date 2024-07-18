@@ -21,8 +21,7 @@ def main():
             if len(content) == 0:
                 print("You currently have no applications in your list.")
             else:
-                fileContentsString = ", ".join(content).replace('\n', '')
-                print(fileContentsString)
+                print("Currently your list contains:" + ", ".join(content).replace('\n', ''))
 
         elif ans == "2":
             manipulateList.addToList()
