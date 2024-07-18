@@ -11,22 +11,22 @@ def main():
               "1: View items in lockedFiles\n"
               "2: Add to list of items\n"
               "3: Remove items\n"
-              "4: Start new list\n"
+              "4: Clear your list\n"
               "5. Exit program\n")
 
         ans = input("Which option would you like to take?\n")
 
         if ans == "1":
-            manipulateList.addToList()
+            pass
 
         elif ans == "2":
-            pass
+            manipulateList.addToList()
 
         elif ans == "3":
             pass
 
         elif ans == "4":
-            pass
+            manipulateList.clearList()
 
         elif ans == "5":
             script_running = False

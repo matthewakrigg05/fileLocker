@@ -1,5 +1,8 @@
 from checkFiles import lockedFilesContent
 
+def clearList():
+    file = open("./lockedFiles.txt", 'w')
+    file.close()
 
 def addToList():
     file = open("./lockedFiles.txt", 'a')
@@ -32,6 +35,3 @@ def addToList():
         print("Item added to list!")
 
     file.close()
-
-
-addToList()
