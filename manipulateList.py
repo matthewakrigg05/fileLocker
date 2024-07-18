@@ -11,11 +11,6 @@ def addToList():
     fileContents = lockedFilesContent()
     fileContentsString = ", ".join(fileContents).replace('\n', '')
 
-    if not fileContents:
-        print("You currently have no items in your file")
-    else:
-        print("Currently in your file you have: " + fileContentsString)
-
     fileToAdd = input(
         "Please write the .exe (as it would appear in the file explorer) name of the app you wish to add.\n")
 
