@@ -30,7 +30,6 @@ def main():
 
         elif ans == "5":
             script_running = False
-
             print("Thank you for using fileLocker!")
 
         else:
