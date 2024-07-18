@@ -17,13 +17,17 @@ def main():
         ans = input("Which option would you like to take?\n")
 
         if ans == "1":
-            pass
+            content = checkFiles.lockedFilesContent()
+            if len(content) == 0:
+                print("You currently have no applications in your list.")
+            else:
+                print("Currently your list contains:" + ", ".join(content).replace('\n', ''))
 
         elif ans == "2":
             manipulateList.addToList()
 
         elif ans == "3":
-            pass
+            manipulateList.removeItem()
 
         elif ans == "4":
             manipulateList.clearList()

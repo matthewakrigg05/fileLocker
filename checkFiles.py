@@ -21,13 +21,13 @@ def checkIfProcessRunning(program):
 
 
 def lockedFilesContent():
-    file = open("./lockedFiles.txt", 'r')
-    fileContents = set()
-    Lines = file.readlines()
+    with open("./lockedFiles.txt", 'r') as file:
+        fileContents = set()
+        Lines = file.readlines()
 
-    for line in Lines:
-        strippedLine = line[:-1]
-        fileContents.add(strippedLine)
+        for line in Lines:
+            strippedLine = line[:-1]
+            fileContents.add(strippedLine)
 
     return fileContents
 

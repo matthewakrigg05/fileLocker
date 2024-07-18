@@ -1,37 +1,53 @@
 from checkFiles import lockedFilesContent
 
+
 def clearList():
     file = open("./lockedFiles.txt", 'w')
     file.close()
 
+
 def addToList():
-    file = open("./lockedFiles.txt", 'a')
-    itemAlreadyInFile = False
+    with open("./lockedFiles.txt", 'a') as file:
+        itemAlreadyInFile = False
 
+        fileContents = lockedFilesContent()
+
+        fileToAdd = input(
+            "Please write the .exe (as it would appear in the file explorer) name of the app you wish to add.\n")
+
+        for item in fileContents:
+            if item == fileToAdd:
+                itemAlreadyInFile = True
+                break
+
+        if itemAlreadyInFile:
+            print("This item is already in this file!")
+        elif not fileContents:
+            file.write(fileToAdd + "\n")
+            print("Item added to list!")
+        else:
+            file.write(fileToAdd + "\n")
+            print("Item added to list!")
+
+
+def removeItem():
     fileContents = lockedFilesContent()
-    fileContentsString = ", ".join(fileContents).replace('\n', '')
-
-    if not fileContents:
-        print("You currently have no items in your file")
-    else:
-        print("Currently in your file you have: " + fileContentsString)
-
-    fileToAdd = input(
-        "Please write the .exe (as it would appear in the file explorer) name of the app you wish to add.\n")
+    removed = False
+    toRemove = input("Please write the .exe name of the application you wish to remove from your list (ensure that your"
+                     + " choice is written as it is in the text file)\n")
 
     for item in fileContents:
-        print(item)
-        if item == fileToAdd:
-            itemAlreadyInFile = True
-            break
+        if item == toRemove:
+            fileContents.remove(toRemove)
+            with open("./lockedFiles.txt", "r+") as f:
+                lines = f.readlines()
+                lines.pop(lines.index(item + "\n"))
+                f.truncate()
+                f.writelines(lines)
+            removed = True
+        break
 
-    if itemAlreadyInFile == True:
-        print("This item is already in this file!")
-    elif not fileContents:
-        file.write(fileToAdd + "\n")
-        print("Item added to list!")
+    if not removed:
+        print("Item could not be removed, make sure the case matches and the item does exist in the list.")
     else:
-        file.write(fileToAdd + "\n")
-        print("Item added to list!")
-
-    file.close()
+        print("Item successfully removed from list.")
