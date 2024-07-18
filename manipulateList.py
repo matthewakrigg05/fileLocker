@@ -32,20 +32,22 @@ def addToList():
 
 def removeItem():
     fileContents = lockedFilesContent()
-
+    removed = False
     toRemove = input("Please write the .exe name of the application you wish to remove from your list (ensure that your"
                      + " choice is written as it is in the text file)\n")
 
     for item in fileContents:
-
         if item == toRemove:
             fileContents.remove(toRemove)
             with open("./lockedFiles.txt", "r+") as f:
                 lines = f.readlines()
-
                 lines.pop(lines.index(item + "\n"))
-
                 f.truncate()
-
                 f.writelines(lines)
-            break
+            removed = True
+        break
+
+    if not removed:
+        print("Item could not be removed, make sure the case matches and the item does exist in the list.")
+    else:
+        print("Item successfully removed from list.")
