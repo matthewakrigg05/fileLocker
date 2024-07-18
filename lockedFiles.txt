@@ -1,2 +1,2 @@
-Spotify.exe
 chrome.exe
+Spotify.exe

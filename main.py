@@ -1,5 +1,5 @@
 import checkFiles
-import addToList
+import manipulateList
 
 
 def main():
@@ -17,7 +17,7 @@ def main():
         ans = input("Which option would you like to take?\n")
 
         if ans == "1":
-            addToList.addToList()
+            manipulateList.addToList()
 
         elif ans == "2":
             pass
