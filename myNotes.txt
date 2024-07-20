@@ -1,2 +1,0 @@
-process:
-check for locked files -> add files to lock -> run it -> stop them being executed (event listener? monitor task manager?)
