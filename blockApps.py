@@ -1,5 +1,6 @@
 import os
 import subprocess
+import time
 
 
 def timeToBlock():
@@ -14,15 +15,12 @@ def timeToBlock():
         except ValueError:
             timeToLock = (input("Please enter an integer value as your length of time.\n"))
 
-    return timeToLock
+    return int(timeToLock)
 
 
 def closeAppIfDetected(appsToClose):
 
     for apps in appsToClose:
         subprocess.call("TASKKILL /F /IM " + apps, shell=True)
-    """
-    needs:  how long to check for
-    check the apps running -> if it is close it, if not, wait x time and check again.
-    :return:
-    """
+
+    time.sleep(5)

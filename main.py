@@ -1,6 +1,7 @@
 import blockApps
 import checkFiles
 import manipulateList
+import time
 
 
 def main():
@@ -32,7 +33,7 @@ def main():
             manipulateList.clearList()
 
         elif ans == "5":
-            blockApps.timeToBlock()
+            timeToLock = time.time() + blockApps.timeToBlock()
             runningPrograms = []
 
             for program in txtContent:
@@ -46,11 +47,10 @@ def main():
             else:
                 print("Currently you are running: " + ", ".join(runningPrograms) + ".")
 
-            blockApps.closeAppIfDetected(runningPrograms)
+                while time.time() < timeToLock:
+                    blockApps.closeAppIfDetected(runningPrograms)
 
-            """
-            check if the apps are running -> if are then close
-            """
+                print("Your chosen time to block apps has ended!")
 
         elif ans == "6":
             script_running = False
