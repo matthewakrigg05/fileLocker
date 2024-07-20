@@ -1,4 +1,1 @@
 Spotify.exe
-chrome.exe
-Spotify.exe
-chrome.exe

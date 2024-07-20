@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 
 def timeToBlock():
@@ -18,10 +19,10 @@ def timeToBlock():
 
 def closeAppIfDetected(appsToClose):
 
-
+    for apps in appsToClose:
+        subprocess.call("TASKKILL /F /IM " + apps, shell=True)
     """
-    needs: apps to close, how long to check for
+    needs:  how long to check for
     check the apps running -> if it is close it, if not, wait x time and check again.
     :return:
     """
-    pass

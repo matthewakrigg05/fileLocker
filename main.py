@@ -46,6 +46,8 @@ def main():
             else:
                 print("Currently you are running: " + ", ".join(runningPrograms) + ".")
 
+            blockApps.closeAppIfDetected(runningPrograms)
+
             """
             check if the apps are running -> if are then close
             """
