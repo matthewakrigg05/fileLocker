@@ -6,23 +6,21 @@ def clearList():
     file.close()
 
 
-def addToList():
+def addToList(contents):
     with open("./lockedFiles.txt", 'a') as file:
         itemAlreadyInFile = False
-
-        fileContents = lockedFilesContent()
 
         fileToAdd = input(
             "Please write the .exe (as it would appear in the file explorer) name of the app you wish to add.\n")
 
-        for item in fileContents:
+        for item in contents:
             if item == fileToAdd:
                 itemAlreadyInFile = True
                 break
 
         if itemAlreadyInFile:
             print("This item is already in this file!")
-        elif not fileContents:
+        elif not contents:
             file.write(fileToAdd + "\n")
             print("Item added to list!")
         else:
@@ -30,15 +28,15 @@ def addToList():
             print("Item added to list!")
 
 
-def removeItem():
+def removeItem(contents):
     fileContents = lockedFilesContent()
     removed = False
     toRemove = input("Please write the .exe name of the application you wish to remove from your list (ensure that your"
                      + " choice is written as it is in the text file)\n")
 
-    for item in fileContents:
+    for item in contents:
         if item == toRemove:
-            fileContents.remove(toRemove)
+            contents.remove(toRemove)
             with open("./lockedFiles.txt", "r+") as f:
                 lines = f.readlines()
                 lines.pop(lines.index(item + "\n"))
@@ -53,8 +51,7 @@ def removeItem():
         print("Item successfully removed from list.")
 
 
-def showList():
-    content = lockedFilesContent()
+def showList(content):
     if len(content) == 0:
         print("You currently have no applications in your list.")
     else:

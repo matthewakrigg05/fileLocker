@@ -1,7 +1,7 @@
 import os
 
 
-def blockApps():
+def timeToBlock():
     timeToLock = input("How long would you like to block your chosen apps for (in seconds)\n")
 
     while not timeToLock.isnumeric():
@@ -12,4 +12,16 @@ def blockApps():
                 timeToLock = input("Please enter an integer value as your length of time.\n")
         except ValueError:
             timeToLock = (input("Please enter an integer value as your length of time.\n"))
-blockApps()
+
+    return timeToLock
+
+
+def closeAppIfDetected(appsToClose):
+
+
+    """
+    needs: apps to close, how long to check for
+    check the apps running -> if it is close it, if not, wait x time and check again.
+    :return:
+    """
+    pass

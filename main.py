@@ -1,3 +1,4 @@
+import blockApps
 import checkFiles
 import manipulateList
 
@@ -5,6 +6,7 @@ import manipulateList
 def main():
     script_running = True
     checkFiles.checkForTxt()
+    txtContent = checkFiles.lockedFilesContent()
 
     while script_running:
         print("Options:\n"
@@ -18,19 +20,25 @@ def main():
         ans = input("Which option would you like to take?\n")
 
         if ans == "1":
-            manipulateList.showList()
+            manipulateList.showList(txtContent)
 
         elif ans == "2":
-            manipulateList.addToList()
+            manipulateList.addToList(txtContent)
 
         elif ans == "3":
-            manipulateList.removeItem()
+            manipulateList.removeItem(txtContent)
 
         elif ans == "4":
             manipulateList.clearList()
 
         elif ans == "5":
-            pass
+            blockApps.timeToBlock()
+
+
+
+            """
+            check if the apps are running -> if are then close
+            """
 
         elif ans == "6":
             script_running = False
