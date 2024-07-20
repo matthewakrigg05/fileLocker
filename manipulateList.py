@@ -51,3 +51,11 @@ def removeItem():
         print("Item could not be removed, make sure the case matches and the item does exist in the list.")
     else:
         print("Item successfully removed from list.")
+
+
+def showList():
+    content = lockedFilesContent()
+    if len(content) == 0:
+        print("You currently have no applications in your list.")
+    else:
+        print("Currently your list contains:" + ", ".join(content).replace('\n', ''))

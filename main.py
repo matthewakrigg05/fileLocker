@@ -17,11 +17,7 @@ def main():
         ans = input("Which option would you like to take?\n")
 
         if ans == "1":
-            content = checkFiles.lockedFilesContent()
-            if len(content) == 0:
-                print("You currently have no applications in your list.")
-            else:
-                print("Currently your list contains:" + ", ".join(content).replace('\n', ''))
+            manipulateList.showList()
 
         elif ans == "2":
             manipulateList.addToList()
