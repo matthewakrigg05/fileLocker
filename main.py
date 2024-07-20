@@ -12,7 +12,8 @@ def main():
               "2: Add to list of items\n"
               "3: Remove items\n"
               "4: Clear your list\n"
-              "5. Exit program\n")
+              "5: Block Apps\n"
+              "6: Exit program\n")
 
         ans = input("Which option would you like to take?\n")
 
@@ -29,6 +30,9 @@ def main():
             manipulateList.clearList()
 
         elif ans == "5":
+            pass
+
+        elif ans == "6":
             script_running = False
             print("Thank you for using fileLocker!")
 
