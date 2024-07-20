@@ -33,8 +33,18 @@ def main():
 
         elif ans == "5":
             blockApps.timeToBlock()
+            runningPrograms = []
 
+            for program in txtContent:
+                running = checkFiles.checkIfProcessRunning(program)
 
+                if running:
+                    runningPrograms.append(program)
+
+            if not runningPrograms:
+                print("None of your locked apps are running")
+            else:
+                print("Currently you are running: " + ", ".join(runningPrograms) + ".")
 
             """
             check if the apps are running -> if are then close

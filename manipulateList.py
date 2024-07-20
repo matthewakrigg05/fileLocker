@@ -55,4 +55,4 @@ def showList(content):
     if len(content) == 0:
         print("You currently have no applications in your list.")
     else:
-        print("Currently your list contains:" + ", ".join(content).replace('\n', ''))
+        print("Currently your list contains: " + ", ".join(content).replace('\n', ''))
