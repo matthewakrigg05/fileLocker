@@ -1,0 +1,5 @@
+Some more ideas i intend to add:
+ - ability to get all .exe files to make adding them easier and faster
+ - add a GUI
+ - make it so that you can unblock the apps early using a password
+ - unlock specific apps using a prompt and passcode
