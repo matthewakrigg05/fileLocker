@@ -33,7 +33,6 @@ def main():
             manipulateList.clearList()
 
         elif ans == "5":
-            timeToLock = time.time() + blockApps.timeToBlock()
             runningPrograms = []
 
             for program in txtContent:
@@ -47,8 +46,14 @@ def main():
             else:
                 print("Currently you are running: " + ", ".join(runningPrograms) + ".")
 
+            toContinue = input("Are you sure you wish to continue? (Y/N)")
+
+            if toContinue == "Y" or toContinue == "y":
+                timeToLock = time.time() + blockApps.timeToBlock()
+                print("Starting...\nTo stop this script, simply close it.")
+
                 while time.time() < timeToLock:
-                    blockApps.closeAppIfDetected(runningPrograms)
+                    blockApps.closeAppIfDetected(txtContent)
 
                 print("Your chosen time to block apps has ended!")
 
@@ -60,4 +65,5 @@ def main():
             print("Please choose an option by entering a number: 1, 2, 3 4 or 5")
 
 
-main()
+if __name__ == "__main__":
+    main()
