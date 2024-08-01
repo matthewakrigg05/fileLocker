@@ -53,7 +53,7 @@ def main():
                 print("Starting...\nTo stop this script, simply close it.")
 
                 while time.time() < timeToLock:
-                    blockApps.closeAppIfDetected(runningPrograms)
+                    blockApps.closeAppIfDetected(txtContent)
 
                 print("Your chosen time to block apps has ended!")
 

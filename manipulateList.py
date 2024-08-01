@@ -1,6 +1,3 @@
-from checkFiles import lockedFilesContent
-
-
 def clearList():
     file = open("./lockedFiles.txt", 'w')
     file.close()
@@ -29,7 +26,6 @@ def addToList(contents):
 
 
 def removeItem(contents):
-    fileContents = lockedFilesContent()
     removed = False
     toRemove = input("Please write the .exe name of the application you wish to remove from your list (ensure that your"
                      + " choice is written as it is in the text file)\n")
