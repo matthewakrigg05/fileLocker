@@ -5,7 +5,8 @@ import time
 
 
 def main():
-    checkFiles.checkForTxt()
+    checkFiles.checkForFilesTxt()
+    checkFiles.checkForWebTxt()
     script_running = True
     txtContent = checkFiles.lockedFilesContent()
 

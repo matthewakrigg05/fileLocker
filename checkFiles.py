@@ -2,7 +2,7 @@ import os
 import subprocess
 
 
-def checkForTxt():
+def checkForFilesTxt():
     filePath = './lockedFiles.txt'
 
     if not os.path.exists(filePath):
@@ -10,6 +10,13 @@ def checkForTxt():
     else:
         return False
 
+def checkForWebTxt():
+    filePath = './lockedFiles.txt'
+
+    if not os.path.exists(filePath):
+        return True
+    else:
+        return False
 
 def checkIfProcessRunning(program):
     activePrograms = str(subprocess.check_output('tasklist'))
@@ -29,4 +36,3 @@ def lockedFilesContent():
             fileContents.add(strippedLine)
 
     return fileContents
-
