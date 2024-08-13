@@ -1,20 +1,17 @@
 import os
 import subprocess
 
-
 def checkForFilesTxt():
-    filePath = './lockedFiles.txt'
-
-    if not os.path.exists(filePath):
-        return True
+    if not os.path.exists('./lockedFiles.txt'):
+        with open('./lockedFiles.txt') as f:
+            f.close()
     else:
         return False
 
 def checkForWebTxt():
-    filePath = './lockedFiles.txt'
-
-    if not os.path.exists(filePath):
-        return True
+    if not os.path.exists('./webDomains.txt'):
+        with open('./webDomains.txt', 'w') as f:
+            f.close()
     else:
         return False
 
