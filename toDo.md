@@ -8,3 +8,4 @@ Some more ideas I intend to add:
  - make it possible to block web domains too eg youtube
  - allow to enable time periods to block things eg during work hours 
  - once app is added, use checkboxes on UI to decide whether to block
+ - make so that adding websites doesnt need new methods
