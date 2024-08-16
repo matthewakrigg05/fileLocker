@@ -1,3 +1,6 @@
+import checkFiles
+
+
 def clearList():
     file = open("./lockedFiles.txt", 'w')
     file.close()
@@ -22,7 +25,7 @@ def addToList(contents):
             print("Item added to list!")
         else:
             file.write(fileToAdd + "\n")
-            print("Item added to list!")
+            print("Item added to list!\n Now your file contains: " + ", ".join(checkFiles.lockedFilesContent()))
 
 
 def removeItem(contents):

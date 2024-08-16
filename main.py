@@ -12,7 +12,7 @@ def main():
 
     while script_running:
         print("Options:\n"
-              "1: View items in lockedFiles\n"
+              "1: View items in lockedFiles and blocked websites\n"
               "2: Add to list of items\n"
               "3: Remove items\n"
               "4: Clear your list\n"
