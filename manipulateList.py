@@ -2,12 +2,12 @@ import checkFiles
 
 
 def clearList():
-    file = open("./lockedFiles.txt", 'w')
+    file = open("lockedApps.txt", 'w')
     file.close()
 
 
 def addToList(contents):
-    with open("./lockedFiles.txt", 'a') as file:
+    with open("lockedApps.txt", 'a') as file:
         itemAlreadyInFile = False
 
         fileToAdd = input(
@@ -25,7 +25,7 @@ def addToList(contents):
             print("Item added to list!")
         else:
             file.write(fileToAdd + "\n")
-            print("Item added to list!\n Now your file contains: " + ", ".join(checkFiles.lockedFilesContent()))
+            print("Item added to list!\n Now your file contains: " + ", ".join(checkFiles.lockedContent()))
 
 
 def removeItem(contents):
@@ -36,7 +36,7 @@ def removeItem(contents):
     for item in contents:
         if item == toRemove:
             contents.remove(toRemove)
-            with open("./lockedFiles.txt", "r+") as f:
+            with open("lockedApps.txt", "r+") as f:
                 lines = f.readlines()
                 lines.pop(lines.index(item + "\n"))
                 f.truncate()
@@ -55,3 +55,10 @@ def showList(content):
         print("You currently have no applications in your list.")
     else:
         print("Currently your list contains: " + ", ".join(content).replace('\n', ''))
+
+
+def showBlockedWebsites(websites):
+    if len(websites) == 0:
+        print("You currently have no websites in your list.")
+    else:
+       print("Currently your list contains: " + ", ".join(websites).replace('\n', ''))

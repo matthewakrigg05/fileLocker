@@ -8,11 +8,13 @@ def main():
     checkFiles.checkForFilesTxt()
     checkFiles.checkForWebTxt()
     script_running = True
-    txtContent = checkFiles.lockedFilesContent()
+    txtFileContent = checkFiles.lockedContent()
 
     while script_running:
         print("Options:\n"
-              "1: View items in lockedFiles and blocked websites\n"
+              "1: View items in lockedApps and blocked websites\n"
+              " 1b: View items in only lockedApps\n"
+              " 1c: View items in only lockedDomains\n"
               "2: Add to list of items\n"
               "3: Remove items\n"
               "4: Clear your list\n"
@@ -22,13 +24,16 @@ def main():
         ans = input("Which option would you like to take?\n")
 
         if ans == "1":
-            manipulateList.showList(txtContent)
+            manipulateList.showList(txtFileContent)
+
+        # elif ans == "1b":
+        #     manipulateList.showBlockedWebsites()
 
         elif ans == "2":
-            manipulateList.addToList(txtContent)
+            manipulateList.addToList(txtFileContent)
 
         elif ans == "3":
-            manipulateList.removeItem(txtContent)
+            manipulateList.removeItem(txtFileContent)
 
         elif ans == "4":
             manipulateList.clearList()
@@ -36,7 +41,7 @@ def main():
         elif ans == "5":
             runningPrograms = []
 
-            for program in txtContent:
+            for program in txtFileContent:
                 running = checkFiles.checkIfProcessRunning(program)
 
                 if running:
@@ -54,7 +59,7 @@ def main():
                 print("Starting...\nTo stop this script, simply close it.")
 
                 while time.time() < timeToLock:
-                    blockApps.closeAppIfDetected(txtContent)
+                    blockApps.closeAppIfDetected(txtFileContent)
 
                 print("Your chosen time to block apps has ended!")
 
