@@ -33,6 +33,7 @@ def main():
 
             case "2":
                 manipulateList.addToList(checkFiles.lockedContent())
+                manipulateList.showList(checkFiles.lockedContent())
                 continue
 
             case "3":

@@ -20,12 +20,10 @@ def addToList(contents):
 
         if itemAlreadyInFile:
             print("This item is already in this file!")
-        elif not contents:
-            file.write(fileToAdd + "\n")
-            print("Item added to list!")
         else:
             file.write(fileToAdd + "\n")
-            print("Item added to list!\n Now your file contains: " + ", ".join(checkFiles.lockedContent()))
+            print("Item added to list!")
+
 
 
 def removeItem(contents):

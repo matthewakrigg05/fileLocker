@@ -45,4 +45,15 @@ def lockedContent():
 
     return filesContents
 
-print(lockedContent())
+
+def lockedAppsContent():
+    fileContents = []
+
+    with open("lockedApps.txt", 'r') as file:
+        Lines = file.readlines()
+
+        for line in Lines:
+            strippedLine = line.strip("\n")
+            fileContents.append(strippedLine)
+
+    return fileContents
