@@ -25,7 +25,6 @@ def addToList(contents):
             print("Item added to list!")
 
 
-
 def removeItem(contents):
     removed = False
     toRemove = input("Please write the .exe name of the application you wish to remove from your list (ensure that your"
@@ -64,11 +63,11 @@ def showBlockedWebsites(websites):
     if len(websites) == 0:
         print("You currently have no websites in your list.")
     else:
-        print("Currently your list contains: " + ", ".join(websites).replace('\n', ''))
+        print("Currently your websites list contains: " + ", ".join(websites).replace('\n', ''))
 
 
 def showBlockedApps(apps):
     if len(apps) == 0:
-        print("You currently have no websites in your list.")
+        print("You currently have no apps in your list.")
     else:
-        print("Currently your list contains: " + ", ".join(apps).replace('\n', ''))
+        print("Currently your apps list contains: " + ", ".join(apps).replace('\n', ''))

@@ -26,7 +26,6 @@ def main():
         match ans:
             case "1":
                 manipulateList.showList(checkFiles.lockedContent())
-                continue
 
             # case "1b":
             #     return manipulateList.showBlockedWebsites()
@@ -34,15 +33,12 @@ def main():
             case "2":
                 manipulateList.addToList(checkFiles.lockedContent())
                 manipulateList.showList(checkFiles.lockedContent())
-                continue
 
             case "3":
                 manipulateList.removeItem(checkFiles.lockedContent())
-                continue
 
             case "4":
                 manipulateList.clearList()
-                continue
 
             case "5":
                 runningPrograms = []
@@ -69,15 +65,12 @@ def main():
 
                     print("Your chosen time to block apps has ended!")
 
-                continue
-
             case "6":
                 print("Thank you for using fileLocker!")
                 script_running = False
 
             case _:
                 print("Please choose an option by entering a number: 1, 2, 3 4 or 5")
-                continue
 
 
 if __name__ == "__main__":

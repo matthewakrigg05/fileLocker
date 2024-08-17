@@ -53,7 +53,18 @@ def lockedAppsContent():
         Lines = file.readlines()
 
         for line in Lines:
-            strippedLine = line.strip("\n")
-            fileContents.append(strippedLine)
+            fileContents.append(line.strip("\n"))
+
+    return fileContents
+
+
+def lockedDomainsContent():
+    fileContents = []
+
+    with open("lockedDomains.txt", "r") as file:
+        lines = file.readlines()
+
+        for line in lines:
+            fileContents.append(line.strip("\n"))
 
     return fileContents
