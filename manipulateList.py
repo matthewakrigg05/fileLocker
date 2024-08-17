@@ -61,7 +61,7 @@ def showBlockedWebsites(websites):
     if len(websites) == 0:
         print("You currently have no websites in your list.")
     else:
-       print("Currently your list contains: " + ", ".join(websites).replace('\n', ''))
+        print("Currently your list contains: " + ", ".join(websites).replace('\n', ''))
 
 
 def showBlockedApps(apps):

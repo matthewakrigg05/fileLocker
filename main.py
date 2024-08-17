@@ -17,58 +17,60 @@ def main():
               " 1c: View items in only lockedDomains\n"
               "2: Add to list of items\n"
               "3: Remove items\n"
-              "4: Clear your list\n"
-              "5: Block Apps\n"
-              "6: Exit program\n")
+              "4: Clear your lockedApps list\n"
+              "5: Clear your lockedDomains list\n"
+              "6: Block Apps\n"
+              "7: Exit program\n")
 
         ans = input("Which option would you like to take?\n")
 
-        if ans == "1":
-            manipulateList.showList(txtFileContent)
+        match ans:
+            case "1":
+                return manipulateList.showList(txtFileContent)
 
-        # elif ans == "1b":
-        #     manipulateList.showBlockedWebsites()
+            case "1b":
+                return manipulateList.showBlockedWebsites()
 
-        elif ans == "2":
-            manipulateList.addToList(txtFileContent)
+            case "2":
+                return manipulateList.addToList(txtFileContent)
 
-        elif ans == "3":
-            manipulateList.removeItem(txtFileContent)
+            case "3":
+                return manipulateList.removeItem(txtFileContent)
 
-        elif ans == "4":
-            manipulateList.clearList()
+            case "4":
+                return manipulateList.clearList()
 
-        elif ans == "5":
-            runningPrograms = []
+            case "5":
+                runningPrograms = []
 
-            for program in txtFileContent:
-                running = checkFiles.checkIfProcessRunning(program)
+                for program in txtFileContent:
+                    running = checkFiles.checkIfProcessRunning(program)
 
-                if running:
-                    runningPrograms.append(program)
+                    if running:
+                        runningPrograms.append(program)
 
-            if not runningPrograms:
-                print("None of your locked apps are running")
-            else:
-                print("Currently you are running: " + ", ".join(runningPrograms) + ".")
+                if not runningPrograms:
+                    print("None of your locked apps are running")
+                else:
+                    print("Currently you are running: " + ", ".join(runningPrograms) + ".")
 
-            toContinue = input("Are you sure you wish to continue? (Y/N)")
+                toContinue = input("Are you sure you wish to continue? (Y/N)")
 
-            if toContinue == "Y" or toContinue == "y":
-                timeToLock = time.time() + blockApps.timeToBlock()
-                print("Starting...\nTo stop this script, simply close it.")
+                if toContinue == "Y" or toContinue == "y":
+                    timeToLock = time.time() + blockApps.timeToBlock()
+                    print("Starting...\nTo stop this script, simply close it.")
 
-                while time.time() < timeToLock:
-                    blockApps.closeAppIfDetected(txtFileContent)
+                    while time.time() < timeToLock:
+                        blockApps.closeAppIfDetected(txtFileContent)
 
-                print("Your chosen time to block apps has ended!")
+                    print("Your chosen time to block apps has ended!")
 
-        elif ans == "6":
-            script_running = False
-            print("Thank you for using fileLocker!")
+            case "6":
+                script_running = False
+                print("Thank you for using fileLocker!")
 
-        else:
-            print("Please choose an option by entering a number: 1, 2, 3 4 or 5")
+            case _:
+                print("Please choose an option by entering a number: 1, 2, 3 4 or 5")
 
 
 if __name__ == "__main__":
