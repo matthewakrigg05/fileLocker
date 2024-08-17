@@ -11,8 +11,8 @@ def checkForFilesTxt():
 
 
 def checkForWebTxt():
-    if not os.path.exists('./webDomains.txt'):
-        with open('./webDomains.txt', 'w') as f:
+    if not os.path.exists('lockedDomains.txt'):
+        with open('lockedDomains.txt', 'w') as f:
             f.close()
     else:
         return False
@@ -35,12 +35,11 @@ def lockedContent():
             strippedLine = line[:-1]
             filesContents.add(strippedLine)
 
-    with open("./webDomains.txt", 'r') as file:
-        domains = set()
+    with open("lockedDomains.txt", 'r') as file:
         Lines = file.readlines()
 
         for line in Lines:
             strippedLine = line[:-1]
-            domains.add(strippedLine)
+            filesContents.add(strippedLine)
 
     return filesContents
