@@ -15,10 +15,13 @@ def main():
               " 1b: View items in only lockedApps\n"
               " 1c: View items in only lockedDomains\n"
               "2: Add to list of items\n"
-              "3: Remove items\n"
-              "4: Clear your lockedApps list\n"
-              "5: Clear your lockedDomains list\n"
-              "6: Block Apps\n"
+              "3: Remove items from list\n"
+              "4: Clear your lists\n"
+              " 4b: Clear your lockedApps list\n"
+              " 4c: Clear your lockedDomains list\n"
+              "6: Block apps and websites\n"
+              " 6b: Block only apps\n"
+              " 6c: Block only websites\n"
               "7: Exit program\n")
 
         ans = input("Which option would you like to take?\n")
@@ -28,7 +31,6 @@ def main():
                 manipulateList.showList(checkFiles.lockedContent())
 
             case "1b":
-
                 manipulateList.showBlockedApps()
 
             case "1c":
@@ -42,7 +44,13 @@ def main():
                 manipulateList.removeItem(checkFiles.lockedContent())
 
             case "4":
-                manipulateList.clearList()
+                manipulateList.clearLists()
+
+            case "4b":
+                manipulateList.clearApps()
+
+            case "4c":
+                manipulateList.clearWebsites()
 
             case "5":
                 runningPrograms = []

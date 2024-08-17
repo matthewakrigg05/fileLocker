@@ -1,9 +1,22 @@
 import checkFiles
 
 
-def clearList():
-    file = open("lockedApps.txt", 'w')
-    file.close()
+def clearLists():
+    appsFile = open("lockedApps.txt", 'w')
+    appsFile.close()
+
+    websiteFile = open("lockedDomains.txt", "w")
+    websiteFile.close()
+
+
+def clearApps():
+    appsFile = open("lockedApps.txt", 'w')
+    appsFile.close()
+
+
+def clearWebsites():
+    websiteFile = open("lockedDomains.txt", "w")
+    websiteFile.close()
 
 
 def addToList(contents):
