@@ -59,14 +59,14 @@ def showList(content):
         print("Currently your list contains: " + ", ".join(content).replace('\n', ''))
 
 
-def showBlockedWebsites(websites):
+def showBlockedWebsites(websites=checkFiles.lockedDomainsContent()):
     if len(websites) == 0:
         print("You currently have no websites in your list.")
     else:
         print("Currently your websites list contains: " + ", ".join(websites).replace('\n', ''))
 
 
-def showBlockedApps(apps):
+def showBlockedApps(apps=checkFiles.lockedAppsContent()):
     if len(apps) == 0:
         print("You currently have no apps in your list.")
     else:

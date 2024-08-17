@@ -27,8 +27,12 @@ def main():
             case "1":
                 manipulateList.showList(checkFiles.lockedContent())
 
-            # case "1b":
-            #     return manipulateList.showBlockedWebsites()
+            case "1b":
+
+                manipulateList.showBlockedApps()
+
+            case "1c":
+                manipulateList.showBlockedWebsites()
 
             case "2":
                 manipulateList.addToList(checkFiles.lockedContent())
@@ -71,6 +75,8 @@ def main():
 
             case _:
                 print("Please choose an option by entering a number: 1, 2, 3 4 or 5")
+
+        time.sleep(2.5)
 
 
 if __name__ == "__main__":
