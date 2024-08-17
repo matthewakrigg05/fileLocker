@@ -8,7 +8,6 @@ def main():
     checkFiles.checkForFilesTxt()
     checkFiles.checkForWebTxt()
     script_running = True
-    txtFileContent = checkFiles.lockedContent()
 
     while script_running:
         print("Options:\n"
@@ -26,24 +25,28 @@ def main():
 
         match ans:
             case "1":
-                return manipulateList.showList(txtFileContent)
+                manipulateList.showList(checkFiles.lockedContent())
+                continue
 
-            case "1b":
-                return manipulateList.showBlockedWebsites()
+            # case "1b":
+            #     return manipulateList.showBlockedWebsites()
 
             case "2":
-                return manipulateList.addToList(txtFileContent)
+                manipulateList.addToList(checkFiles.lockedContent())
+                continue
 
             case "3":
-                return manipulateList.removeItem(txtFileContent)
+                manipulateList.removeItem(checkFiles.lockedContent())
+                continue
 
             case "4":
-                return manipulateList.clearList()
+                manipulateList.clearList()
+                continue
 
             case "5":
                 runningPrograms = []
 
-                for program in txtFileContent:
+                for program in checkFiles.lockedContent():
                     running = checkFiles.checkIfProcessRunning(program)
 
                     if running:
@@ -61,16 +64,19 @@ def main():
                     print("Starting...\nTo stop this script, simply close it.")
 
                     while time.time() < timeToLock:
-                        blockApps.closeAppIfDetected(txtFileContent)
+                        blockApps.closeAppIfDetected(checkFiles.lockedContent())
 
                     print("Your chosen time to block apps has ended!")
 
+                continue
+
             case "6":
-                script_running = False
                 print("Thank you for using fileLocker!")
+                script_running = False
 
             case _:
                 print("Please choose an option by entering a number: 1, 2, 3 4 or 5")
+                continue
 
 
 if __name__ == "__main__":

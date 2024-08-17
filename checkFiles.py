@@ -27,19 +27,22 @@ def checkIfProcessRunning(program):
 
 
 def lockedContent():
+    filesContents = []
+
     with open("lockedApps.txt", 'r') as file:
-        filesContents = set()
         Lines = file.readlines()
 
         for line in Lines:
-            strippedLine = line[:-1]
-            filesContents.add(strippedLine)
+            strippedLine = line.strip("\n")
+            filesContents.append(strippedLine)
 
     with open("lockedDomains.txt", 'r') as file:
         Lines = file.readlines()
 
         for line in Lines:
-            strippedLine = line[:-1]
-            filesContents.add(strippedLine)
+            strippedLine = line.strip("\n")
+            filesContents.append(strippedLine)
 
     return filesContents
+
+print(lockedContent())

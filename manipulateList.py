@@ -34,15 +34,20 @@ def removeItem(contents):
                      + " choice is written as it is in the text file)\n")
 
     for item in contents:
-        if item == toRemove:
+        strippedLine = item.strip("\n")
+        if strippedLine == toRemove:
             contents.remove(toRemove)
+
             with open("lockedApps.txt", "r+") as f:
                 lines = f.readlines()
-                lines.pop(lines.index(item + "\n"))
-                f.truncate()
-                f.writelines(lines)
+
+            with open("lockedApps.txt", "w") as f:
+                for line in lines:
+                    if line.strip("\n") != toRemove:
+                        f.write(line)
+
             removed = True
-        break
+            break
 
     if not removed:
         print("Item could not be removed, make sure the case matches and the item does exist in the list.")
