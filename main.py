@@ -1,4 +1,5 @@
 import blockApps
+import blockWebsite
 import checkFiles
 import manipulateList
 import time
@@ -14,7 +15,8 @@ def main():
               "1: View items in lockedApps and blocked websites\n"
               " 1b: View items in only lockedApps\n"
               " 1c: View items in only lockedDomains\n"
-              "2: Add to list of items\n"
+              "2: Add to list of app items\n"
+              " 2b: Add to list of websites\n"
               "3: Remove items from list\n"
               "4: Clear your lists\n"
               " 4b: Clear your lockedApps list\n"
@@ -37,7 +39,11 @@ def main():
                 manipulateList.showBlockedWebsites()
 
             case "2":
-                manipulateList.addToList(checkFiles.lockedContent())
+                manipulateList.addToList("./lockedApps.txt", checkFiles.lockedAppsContent())
+                manipulateList.showList(checkFiles.lockedContent())
+
+            case ("2b"):
+                manipulateList.addToList("./lockedDomains.txt", checkFiles.lockedDomainsContent())
                 manipulateList.showList(checkFiles.lockedContent())
 
             case "3":
@@ -71,10 +77,12 @@ def main():
                 if toContinue == "Y" or toContinue == "y":
                     timeToLock = time.time() + blockApps.timeToBlock()
                     print("Starting...\nTo stop this script, simply close it.")
+                    blockWebsite.blockWebsites(checkFiles.lockedDomainsContent())
 
                     while time.time() < timeToLock:
                         blockApps.closeAppIfDetected(checkFiles.lockedContent())
 
+                    blockWebsite.unblockWebsites()
                     print("Your chosen time to block apps has ended!")
 
             case "6":

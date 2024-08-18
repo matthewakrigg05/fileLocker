@@ -19,12 +19,18 @@ def clearWebsites():
     websiteFile.close()
 
 
-def addToList(contents):
-    with open("lockedApps.txt", 'a') as file:
-        itemAlreadyInFile = False
+def addToList(file, contents):
 
-        fileToAdd = input(
-            "Please write the .exe (as it would appear in the file explorer) name of the app you wish to add.\n")
+    match file:
+        case "./lockedApps.txt":
+            fileToAdd = input(
+                "Please write the .exe (as it would appear in the file explorer) name of the app you wish to add.\n")
+
+        case "./lockedDomains.txt":
+            fileToAdd = input("Please input the website in the form example.com to add it to the list\n")
+
+    with open(file, 'a') as file:
+        itemAlreadyInFile = False
 
         for item in contents:
             if item == fileToAdd:
@@ -84,3 +90,4 @@ def showBlockedApps(apps=checkFiles.lockedAppsContent()):
         print("You currently have no apps in your list.")
     else:
         print("Currently your apps list contains: " + ", ".join(apps).replace('\n', ''))
+        
