@@ -20,7 +20,6 @@ def clearWebsites():
 
 
 def addToList(file, contents):
-
     match file:
         case "./lockedApps.txt":
             fileToAdd = input(
@@ -44,26 +43,37 @@ def addToList(file, contents):
             print("Item added to list!")
 
 
-def removeItem(contents):
+def removeItem(file, contents):
     removed = False
-    toRemove = input("Please write the .exe name of the application you wish to remove from your list (ensure that your"
-                     + " choice is written as it is in the text file)\n")
 
-    for item in contents:
-        strippedLine = item.strip("\n")
-        if strippedLine == toRemove:
-            contents.remove(toRemove)
+    match file:
+        case "./lockedApps.txt":
+            toRemove = input(
+                "Please write the .exe name of the application you wish to remove from your list (ensure that your"
+                + " choice is written as it is in the text file)\n")
 
-            with open("lockedApps.txt", "r+") as f:
+            with open("./lockedApps.txt", "r+") as file:
+                lines = file.readlines()
+
+                for line in lines:
+                    if line.strip("\n") != toRemove:
+                        file.write(line)
+
+                removed = True
+
+        case "./lockedDomains.txt":
+            toRemove = input(
+                "Please write the name of the website you wish to remove from your list (ensure that your"
+                + " choice is written as it is in the text file eg. example.com)\n")
+
+            with open("lockedDomains.txt", "r+") as f:
                 lines = f.readlines()
 
-            with open("lockedApps.txt", "w") as f:
                 for line in lines:
                     if line.strip("\n") != toRemove:
                         f.write(line)
 
-            removed = True
-            break
+                removed = True
 
     if not removed:
         print("Item could not be removed, make sure the case matches and the item does exist in the list.")
@@ -90,4 +100,3 @@ def showBlockedApps(apps=checkFiles.lockedAppsContent()):
         print("You currently have no apps in your list.")
     else:
         print("Currently your apps list contains: " + ", ".join(apps).replace('\n', ''))
-        

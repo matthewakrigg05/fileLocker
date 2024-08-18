@@ -18,6 +18,7 @@ def main():
               "2: Add to list of app items\n"
               " 2b: Add to list of websites\n"
               "3: Remove items from list\n"
+              " 3b: Remove website from list\n"
               "4: Clear your lists\n"
               " 4b: Clear your lockedApps list\n"
               " 4c: Clear your lockedDomains list\n"
@@ -47,7 +48,10 @@ def main():
                 manipulateList.showList(checkFiles.lockedContent())
 
             case "3":
-                manipulateList.removeItem(checkFiles.lockedContent())
+                manipulateList.removeItem("./lockedApps.txt", checkFiles.lockedAppsContent())
+
+            case "3b":
+                manipulateList.removeItem("./lockedDomains.txt", checkFiles.lockedDomainsContent())
 
             case "4":
                 manipulateList.clearLists()
