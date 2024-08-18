@@ -2,11 +2,18 @@ import os
 import subprocess
 
 
-def checkForTxt():
-    filePath = './lockedFiles.txt'
+def checkForFilesTxt():
+    if not os.path.exists('textFiles/lockedApps.txt'):
+        with open('textFiles/lockedApps.txt') as f:
+            f.close()
+    else:
+        return False
 
-    if not os.path.exists(filePath):
-        return True
+
+def checkForWebTxt():
+    if not os.path.exists('textFiles/lockedDomains.txt'):
+        with open('textFiles/lockedDomains.txt', 'w') as f:
+            f.close()
     else:
         return False
 
@@ -19,14 +26,45 @@ def checkIfProcessRunning(program):
         return False
 
 
-def lockedFilesContent():
-    with open("./lockedFiles.txt", 'r') as file:
-        fileContents = set()
+def lockedContent():
+    filesContents = []
+
+    with open("textFiles/lockedApps.txt", 'r') as file:
         Lines = file.readlines()
 
         for line in Lines:
-            strippedLine = line[:-1]
-            fileContents.add(strippedLine)
+            strippedLine = line.strip("\n")
+            filesContents.append(strippedLine)
+
+    with open("textFiles/lockedDomains.txt", 'r') as file:
+        Lines = file.readlines()
+
+        for line in Lines:
+            strippedLine = line.strip("\n")
+            filesContents.append(strippedLine)
+
+    return filesContents
+
+
+def lockedAppsContent():
+    fileContents = []
+
+    with open("textFiles/lockedApps.txt", 'r') as file:
+        Lines = file.readlines()
+
+        for line in Lines:
+            fileContents.append(line.strip("\n"))
 
     return fileContents
 
+
+def lockedDomainsContent():
+    fileContents = []
+
+    with open("textFiles/lockedDomains.txt", "r") as file:
+        lines = file.readlines()
+
+        for line in lines:
+            fileContents.append(line.strip("\n"))
+
+    return fileContents

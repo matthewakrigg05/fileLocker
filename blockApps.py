@@ -1,4 +1,3 @@
-import os
 import subprocess
 import time
 
@@ -15,7 +14,7 @@ def timeToBlock():
         except ValueError:
             timeToLock = (input("Please enter an integer value as your length of time.\n"))
 
-    return int(timeToLock * 60)
+    return int(timeToLock) * 60
 
 
 def closeAppIfDetected(appsToClose):
