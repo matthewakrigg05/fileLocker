@@ -22,10 +22,10 @@ def main():
               "4: Clear your lists\n"
               " 4b: Clear your lockedApps list\n"
               " 4c: Clear your lockedDomains list\n"
-              "6: Block apps and websites\n"
-              " 6b: Block only apps\n"
-              " 6c: Block only websites\n"
-              "7: Exit program\n")
+              "5: Block apps and websites\n"
+              " 5b: Block only apps\n"
+              " 5c: Block only websites\n"
+              "6: Exit program\n")
 
         ans = input("Which option would you like to take?\n")
 
@@ -80,21 +80,61 @@ def main():
 
                 if toContinue == "Y" or toContinue == "y":
                     timeToLock = time.time() + blockApps.timeToBlock()
-                    print("Starting...\nTo stop this script, simply close it.")
+                    print("Starting...\n")
+
                     blockWebsite.blockWebsites(checkFiles.lockedDomainsContent())
 
                     while time.time() < timeToLock:
                         blockApps.closeAppIfDetected(checkFiles.lockedContent())
 
                     blockWebsite.unblockWebsites()
+                    print("Your chosen time to block apps and websites has ended!\nTo regain access access to these "
+                          "websites, close your browser and re-open")
+
+            case "5b":
+                runningPrograms = []
+
+                for program in checkFiles.lockedContent():
+                    running = checkFiles.checkIfProcessRunning(program)
+
+                    if running:
+                        runningPrograms.append(program)
+
+                if not runningPrograms:
+                    print("None of your locked apps are running")
+                else:
+                    print("Currently you are running: " + ", ".join(runningPrograms) + ".")
+
+                toContinue = input("Are you sure you wish to continue? (Y/N)")
+
+                if toContinue == "Y" or toContinue == "y":
+                    timeToLock = time.time() + blockApps.timeToBlock()
+                    print("Starting...\n")
+
+                    while time.time() < timeToLock:
+                        blockApps.closeAppIfDetected(checkFiles.lockedContent())
+
                     print("Your chosen time to block apps has ended!")
+
+            case "5c":
+                toContinue = input("Are you sure you wish to continue? (Y/N)")
+
+                if toContinue == "Y" or toContinue == "y":
+                    print("Starting...\n")
+                    blockWebsite.blockWebsites(checkFiles.lockedDomainsContent())
+
+                    time.sleep(blockApps.timeToBlock())
+
+                    blockWebsite.unblockWebsites()
+                    print("Your chosen time to block apps has ended!\nTo regain access access to these websites, "
+                          "close your browser and re-open")
 
             case "6":
                 print("Thank you for using fileLocker!")
                 script_running = False
 
             case _:
-                print("Please choose an option by entering a number: 1, 2, 3 4 or 5")
+                print("Please choose an option by entering one of the given options")
 
         time.sleep(2.5)
 
