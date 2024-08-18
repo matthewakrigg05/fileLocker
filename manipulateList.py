@@ -2,30 +2,30 @@ import checkFiles
 
 
 def clearLists():
-    appsFile = open("lockedApps.txt", 'w')
+    appsFile = open("textFiles/lockedApps.txt", 'w')
     appsFile.close()
 
-    websiteFile = open("lockedDomains.txt", "w")
+    websiteFile = open("textFiles/lockedDomains.txt", "w")
     websiteFile.close()
 
 
 def clearApps():
-    appsFile = open("lockedApps.txt", 'w')
+    appsFile = open("textFiles/lockedApps.txt", 'w')
     appsFile.close()
 
 
 def clearWebsites():
-    websiteFile = open("lockedDomains.txt", "w")
+    websiteFile = open("textFiles/lockedDomains.txt", "w")
     websiteFile.close()
 
 
 def addToList(file, contents):
     match file:
-        case "./lockedApps.txt":
+        case "textFiles/lockedApps.txt":
             fileToAdd = input(
                 "Please write the .exe (as it would appear in the file explorer) name of the app you wish to add.\n")
 
-        case "./lockedDomains.txt":
+        case "textFiles/lockedDomains.txt":
             fileToAdd = input("Please input the website in the form example.com to add it to the list\n")
 
     with open(file, 'a') as file:
@@ -47,12 +47,12 @@ def removeItem(file, contents):
     removed = False
 
     match file:
-        case "./lockedApps.txt":
+        case "textFiles/lockedApps.txt":
             toRemove = input(
                 "Please write the .exe name of the application you wish to remove from your list (ensure that your"
                 + " choice is written as it is in the text file)\n")
 
-            with open("./lockedApps.txt", "r+") as file:
+            with open("textFiles/lockedApps.txt", "r+") as file:
                 lines = file.readlines()
 
                 for line in lines:
@@ -61,12 +61,12 @@ def removeItem(file, contents):
 
                 removed = True
 
-        case "./lockedDomains.txt":
+        case "textFiles/lockedDomains.txt":
             toRemove = input(
                 "Please write the name of the website you wish to remove from your list (ensure that your"
                 + " choice is written as it is in the text file eg. example.com)\n")
 
-            with open("lockedDomains.txt", "r+") as f:
+            with open("textFiles/lockedDomains.txt", "r+") as f:
                 lines = f.readlines()
 
                 for line in lines:

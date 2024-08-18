@@ -40,18 +40,18 @@ def main():
                 manipulateList.showBlockedWebsites()
 
             case "2":
-                manipulateList.addToList("./lockedApps.txt", checkFiles.lockedAppsContent())
+                manipulateList.addToList("textFiles/lockedApps.txt", checkFiles.lockedAppsContent())
                 manipulateList.showList(checkFiles.lockedContent())
 
             case ("2b"):
-                manipulateList.addToList("./lockedDomains.txt", checkFiles.lockedDomainsContent())
+                manipulateList.addToList("textFiles/lockedDomains.txt", checkFiles.lockedDomainsContent())
                 manipulateList.showList(checkFiles.lockedContent())
 
             case "3":
-                manipulateList.removeItem("./lockedApps.txt", checkFiles.lockedAppsContent())
+                manipulateList.removeItem("textFiles/lockedApps.txt", checkFiles.lockedAppsContent())
 
             case "3b":
-                manipulateList.removeItem("./lockedDomains.txt", checkFiles.lockedDomainsContent())
+                manipulateList.removeItem("textFiles/lockedDomains.txt", checkFiles.lockedDomainsContent())
 
             case "4":
                 manipulateList.clearLists()
