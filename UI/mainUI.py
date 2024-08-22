@@ -1,6 +1,6 @@
 from tkinter import *
 from functools import partial
-import blockApps
+import block
 import checkFiles
 import manipulateList
 from UI import UImethods
@@ -19,7 +19,7 @@ class FileLocker:
         Button(root, text="View Items", command=partial(manipulateList.showList, checkFiles.lockedContent())).grid(
             row=2, column=0, pady=5)
 
-        Button(root, text="Add Items to lists", command=partial(UImethods.popUpBox, root)).grid(row=3, column=0, pady=5)
+        Button(root, text="Add Items to lists", command=partial(UImethods.addToListPopUpBox, root)).grid(row=3, column=0, pady=5)
 
         Button(root, text="Remove Items from lists").grid(row=4, column=0, pady=5)
 
@@ -39,7 +39,7 @@ class FileLocker:
         Label(root, text="Amount of time you wish to block:").grid(row=4, column=2, pady=2)
         timeToLock = Entry(root).grid(row=5, column=2, pady=2)
 
-        Button(root, text="Block!", command=partial(blockApps.closeAppIfDetected, checkFiles.lockedAppsContent())).grid(
+        Button(root, text="Block!", command=partial(block.closeAppIfDetected, checkFiles.lockedAppsContent())).grid(
             row=6,
             column=2,
             pady=5)

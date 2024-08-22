@@ -11,8 +11,7 @@ def close_win(top):
     top.destroy()
 
 
-def popUpBox(root):
-
+def addToListPopUpBox(root):
     top = Toplevel(root)
     top.geometry("250x125")
     top.title("File locker: Add to list")
