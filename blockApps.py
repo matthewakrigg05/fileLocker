@@ -9,8 +9,6 @@ def timeToBlock():
         try:
             if timeToLock.isnumeric():
                 continue
-            else:
-                timeToLock = input("Please enter an integer value as your length of time.\n")
         except ValueError:
             timeToLock = (input("Please enter an integer value as your length of time.\n"))
 

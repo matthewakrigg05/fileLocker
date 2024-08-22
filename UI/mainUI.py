@@ -1,4 +1,8 @@
 from tkinter import *
+from functools import partial
+
+import blockApps
+import checkFiles
 
 
 def onClose():
@@ -30,9 +34,11 @@ class FileLocker:
                                                                                                            column=2,
                                                                                                            pady=5)
         Label(root, text="Amount of time you wish to block:").grid(row=4, column=2, pady=2)
-        Entry(root).grid(row=5, column=2, pady=2)
+        timeToBlock = Entry(root).grid(row=5, column=2, pady=2)
 
-        Button(root, text="Block!").grid(row=6, column=2, pady=5)
+        Button(root, text="Block!", command=partial(blockApps.closeAppIfDetected, checkFiles.lockedAppsContent())).grid(row=6,
+                                                                                                               column=2,
+                                                                                                               pady=5)
 
         mainloop()
 

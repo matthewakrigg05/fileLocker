@@ -5,4 +5,3 @@ Some more ideas I intend to add:
  - save lists of apps/sites that you wish to block
  - make it so that you can unblock the apps early using a password or passphrase
  - allow to enable time periods to block things eg during work hours 
- - once app is added, use checkboxes on UI to decide whether to block

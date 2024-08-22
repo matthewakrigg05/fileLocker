@@ -65,7 +65,7 @@ def main():
             case "5":
                 runningPrograms = []
 
-                for program in checkFiles.lockedContent():
+                for program in checkFiles.lockedAppsContent():
                     running = checkFiles.checkIfProcessRunning(program)
 
                     if running:
@@ -85,7 +85,7 @@ def main():
                     blockWebsite.blockWebsites(checkFiles.lockedDomainsContent())
 
                     while time.time() < timeToLock:
-                        blockApps.closeAppIfDetected(checkFiles.lockedContent())
+                        blockApps.closeAppIfDetected(checkFiles.lockedAppsContent())
 
                     blockWebsite.unblockWebsites()
                     print("Your chosen time to block apps and websites has ended!\nTo regain access access to these "
@@ -138,6 +138,3 @@ def main():
 
         time.sleep(2.5)
 
-
-if __name__ == "__main__":
-    main()
