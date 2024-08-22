@@ -1,6 +1,12 @@
 from tkinter import *
 
 
+def onClose():
+    with open("C:\\Windows\\System32\\drivers\\etc\\hosts", 'w') as file:
+        file.close()
+    root.destroy()
+
+
 class FileLocker:
 
     def __init__(self, root):
@@ -26,10 +32,12 @@ class FileLocker:
         Label(root, text="Amount of time you wish to block:").grid(row=4, column=2, pady=2)
         Entry(root).grid(row=5, column=2, pady=2)
 
-        Button(root, text="Block!").grid(row=6,column=2,pady=5)
+        Button(root, text="Block!").grid(row=6, column=2, pady=5)
 
         mainloop()
 
 
 root = Tk()
+root.protocol("WM_DELETE_WINDOW", onClose)
 FileLocker(root)
+
