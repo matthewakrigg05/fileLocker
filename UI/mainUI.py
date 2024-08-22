@@ -1,9 +1,9 @@
 from tkinter import *
 from functools import partial
-from UI import UImethods
 import blockApps
 import checkFiles
 import manipulateList
+from UI import UImethods
 
 
 class FileLocker:
@@ -16,27 +16,33 @@ class FileLocker:
         Label(root, text="File Locker").grid(row=0, column=1, pady=2)
 
         Label(root, text="Manipulate Lists").grid(row=1, column=0, pady=5)
-        Button(root, text="View Items", command=partial(manipulateList.showList, checkFiles.lockedContent())).grid(row=2, column=0, pady=5)
+        Button(root, text="View Items", command=partial(manipulateList.showList, checkFiles.lockedContent())).grid(
+            row=2, column=0, pady=5)
 
-        Button(root, text="Add Items to list").grid(row=3, column=0, pady=5)
+        Button(root, text="Add Items to lists", command=partial(UImethods.popUpBox, root)).grid(row=3, column=0, pady=5)
 
         Button(root, text="Remove Items from lists").grid(row=4, column=0, pady=5)
 
         Button(root, text="Saved Lists", justify=CENTER).grid(row=5, column=0, pady=5)
 
         Label(root, text="Block Apps and Websites").grid(row=1, column=2, pady=2)
-        Checkbutton(root, text="Block Apps", variable=BooleanVar(), onvalue=True, offvalue=False).grid(row=2,
-                                                                                                       column=2,
-                                                                                                       pady=5)
-        Checkbutton(root, text="Block Websites", variable=BooleanVar(), onvalue=True, offvalue=False).grid(row=3,
-                                                                                                           column=2,
-                                                                                                           pady=5)
-        Label(root, text="Amount of time you wish to block:").grid(row=4, column=2, pady=2)
-        timeToBlock = Entry(root).grid(row=5, column=2, pady=2)
+        blockAppsCheck = Checkbutton(root, text="Block Apps", variable=BooleanVar(), onvalue=True, offvalue=False).grid(
+            row=2,
+            column=2,
+            pady=5)
 
-        Button(root, text="Block!", command=partial(blockApps.closeAppIfDetected, checkFiles.lockedAppsContent())).grid(row=6,
-                                                                                                               column=2,
-                                                                                                               pady=5)
+        blockWebsitesCheck = Checkbutton(root, text="Block Websites", variable=BooleanVar(), onvalue=True,
+                                         offvalue=False).grid(row=3,
+                                                              column=2,
+                                                              pady=5)
+
+        Label(root, text="Amount of time you wish to block:").grid(row=4, column=2, pady=2)
+        timeToLock = Entry(root).grid(row=5, column=2, pady=2)
+
+        Button(root, text="Block!", command=partial(blockApps.closeAppIfDetected, checkFiles.lockedAppsContent())).grid(
+            row=6,
+            column=2,
+            pady=5)
 
         mainloop()
 
@@ -44,4 +50,3 @@ class FileLocker:
 root = Tk()
 root.protocol("WM_DELETE_WINDOW", lambda arg=root: UImethods.onClose(arg))
 FileLocker(root)
-

@@ -19,16 +19,13 @@ def clearWebsites():
     websiteFile.close()
 
 
-def addToList(file, contents):
-    match file:
-        case "textFiles/lockedApps.txt":
-            fileToAdd = input(
-                "Please write the .exe (as it would appear in the file explorer) name of the app you wish to add.\n")
+def addToList(contents, fileToAdd):
+    if ".exe" in fileToAdd:
+        file = "textFiles/lockedApps.txt"
+    else:
+        file = "textFiles/lockedDomains.txt"
 
-        case "textFiles/lockedDomains.txt":
-            fileToAdd = input("Please input the website in the form example.com to add it to the list\n")
-
-    with open(file, 'a') as file:
+    with open(file, 'a') as f:
         itemAlreadyInFile = False
 
         for item in contents:
@@ -38,9 +35,11 @@ def addToList(file, contents):
 
         if itemAlreadyInFile:
             print("This item is already in this file!")
+            return False
         else:
-            file.write(fileToAdd + "\n")
+            f.write(fileToAdd + "\n")
             print("Item added to list!")
+            return True
 
 
 def removeItem(file, contents):
