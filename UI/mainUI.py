@@ -19,7 +19,9 @@ class FileLocker:
         Button(root, text="View Items", command=partial(manipulateList.showList, checkFiles.lockedContent())).grid(
             row=2, column=0, pady=5)
 
-        Button(root, text="Add Items to lists", command=partial(UImethods.addToListPopUpBox, root)).grid(row=3, column=0, pady=5)
+        Button(root, text="Add Items to lists", command=partial(UImethods.addToListPopUpBox, root)).grid(row=3,
+                                                                                                         column=0,
+                                                                                                         pady=5)
 
         Button(root, text="Remove Items from lists").grid(row=4, column=0, pady=5)
 
@@ -36,13 +38,14 @@ class FileLocker:
                                                               column=2,
                                                               pady=5)
 
-        Label(root, text="Amount of time you wish to block:").grid(row=4, column=2, pady=2)
-        timeToLock = Entry(root).grid(row=5, column=2, pady=2)
+        Label(root, text="Amount of time you wish to block in minutes:").grid(row=4, column=2, pady=2)
+        timeToLock = (Entry(root))
+        timeToLock.grid(row=5, column=2, pady=2)
 
-        Button(root, text="Block!", command=partial(block.closeAppIfDetected, checkFiles.lockedAppsContent())).grid(
-            row=6,
-            column=2,
-            pady=5)
+        Button(root, text="Block!", command=partial(block.runBlock, root, timeToLock.get(), blockAppsCheck,
+                                                    blockWebsitesCheck)).grid(row=6,
+                                                                              column=2,
+                                                                              pady=5)
 
         mainloop()
 
