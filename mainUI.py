@@ -1,4 +1,4 @@
-import tkinter as tk
+from tkinter import *
 
 
 class FileLocker:
@@ -8,13 +8,28 @@ class FileLocker:
         root.geometry("640x360")
         root.resizable(False, False)
 
-        mainFrame = tk.Frame(root, width=640, height=360)
-        mainFrame.grid(row=0, column=0)
+        Label(root, text="File Locker").grid(row=0, column=1, pady=2)
 
-        label = tk.Label(mainFrame, text="File Locker", justify="center")
-        label.place(relx=0.5, rely=0.05, anchor=tk.CENTER)
+        Label(root, text="Manipulate Lists").grid(row=1, column=0, pady=5)
+        Button(root, text="View Items").grid(row=2, column=0, pady=5)
+        Button(root, text="Add Items to list").grid(row=3, column=0, pady=5)
+        Button(root, text="Remove Items from lists").grid(row=4, column=0, pady=5)
+        Button(root, text="Saved Lists", justify=CENTER).grid(row=5, column=0, pady=5)
+
+        Label(root, text="Block Apps and Websites").grid(row=1, column=2, pady=2)
+        Checkbutton(root, text="Block Apps", variable=BooleanVar(), onvalue=True, offvalue=False).grid(row=2,
+                                                                                                       column=2,
+                                                                                                       pady=5)
+        Checkbutton(root, text="Block Websites", variable=BooleanVar(), onvalue=True, offvalue=False).grid(row=3,
+                                                                                                           column=2,
+                                                                                                           pady=5)
+        Label(root, text="Amount of time you wish to block:").grid(row=4, column=2, pady=2)
+        Entry(root).grid(row=5, column=2, pady=2)
+
+        Button(root, text="Block!").grid(row=6,column=2,pady=5)
+
+        mainloop()
 
 
-root = tk.Tk()
+root = Tk()
 FileLocker(root)
-root.mainloop()
