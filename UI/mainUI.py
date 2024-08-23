@@ -10,6 +10,7 @@ class FileLocker:
 
     def __init__(self, root):
         root.title("File Locker")
+        root.protocol("WM_DELETE_WINDOW", lambda arg=root: UImethods.onClose(arg))
         root.geometry("640x360")
         root.resizable(False, False)
         root.columnconfigure(0, weight=1)
@@ -56,8 +57,3 @@ class FileLocker:
                                                                               pady=5)
 
         mainloop()
-
-
-root = Tk()
-root.protocol("WM_DELETE_WINDOW", lambda arg=root: UImethods.onClose(arg))
-FileLocker(root)
