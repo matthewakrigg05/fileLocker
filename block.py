@@ -30,7 +30,7 @@ def unblockWebsites():
         file.close()
 
 
-def runBlock(root, timeGiven, apps, websites):
+def runBlock(timeGiven, apps, websites):
     if validTimeToBlock(timeGiven):
         toContinue = input("Are you sure you wish to continue? (Y/N)")
         if toContinue == "Y" or toContinue == "y":
