@@ -1,5 +1,8 @@
 from tkinter import *
 import tkinter.messagebox
+
+from Tools.demo.spreadsheet import center
+
 import checkFiles
 from manipulateList import addToList
 
@@ -42,4 +45,4 @@ def viewItemsPopUpBox(root):
                       text=("Currently your list contains: " + ", ".join(content).replace('\n', '')),
                       wraplength=250,
                       justify=LEFT)
-        label.pack(side=TOP,  anchor=NW)
+        label.pack(side=TOP,  anchor=CENTER)
