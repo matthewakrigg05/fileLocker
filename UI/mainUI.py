@@ -24,7 +24,7 @@ class FileLocker:
         Label(root, text="File Locker", justify=CENTER).grid(row=0, columnspan=2, sticky=N)
 
         Label(root, text="Manipulate Lists").grid(row=1, column=0, pady=5)
-        Button(root, text="View Items", command=partial(manipulateList.showList)).grid(row=2, column=0, pady=10)
+        Button(root, text="View Items", command=partial(UImethods.viewItemsPopUpBox, root)).grid(row=2, column=0, pady=10)
 
         Button(root, text="Add Items to lists", command=partial(UImethods.addToListPopUpBox, root)).grid(row=3,
                                                                                                          column=0,

@@ -86,14 +86,6 @@ def removeItem(file, contents):
         print("Item successfully removed from list.")
 
 
-def showList():
-    content = checkFiles.lockedContent()
-    if len(content) == 0:
-        print("You currently have no applications in your list.")
-    else:
-        print("Currently your list contains: " + ", ".join(content).replace('\n', ''))
-
-
 def showBlockedWebsites(websites=checkFiles.lockedDomainsContent()):
     if len(websites) == 0:
         print("You currently have no websites in your list.")
