@@ -22,8 +22,8 @@ class FileLocker:
 
         Label(root, text="File Locker", justify=CENTER).grid(row=0, columnspan=2, sticky=N)
 
-        Label(root, text="Manipulate Lists").grid(row=1, column=0, pady=5)
-        Button(root, text="View Items", command=partial(UImethods.viewItemsPopUpBox, root)).grid(row=2, column=0, pady=10)
+        Label(root, text="Manipulate Lists").grid(row=1, column=0)
+        Button(root, text="View Items", command=partial(UImethods.viewItemsPopUpBox, root)).grid(row=2, column=0, pady=3)
 
         Button(root, text="Add Items to lists", command=partial(UImethods.addToListPopUpBox, root)).grid(row=3,
                                                                                                          column=0,
@@ -33,14 +33,14 @@ class FileLocker:
 
         # Button(root, text="Saved Lists", justify=CENTER).grid(row=5, column=0, pady=5)
 
-        Label(root, text="Block Apps and Websites").grid(row=1, column=1, pady=2)
+        Label(root, text="Block Apps and Websites").grid(row=1, column=1, pady=5)
         blockApps = IntVar()
-        Checkbutton(root, text="Block Apps", variable=blockApps, onvalue=1, offvalue=0).grid(row=2, column=1, pady=5)
+        Checkbutton(root, text="Block Apps", variable=blockApps, onvalue=1, offvalue=0).grid(row=2, column=1)
 
         blockSites = IntVar()
-        Checkbutton(root, text="Block Websites", variable=blockSites, onvalue=1, offvalue=0).grid(row=3, column=1, pady=5)
+        Checkbutton(root, text="Block Websites", variable=blockSites, onvalue=1, offvalue=0).grid(row=3, column=1)
 
-        Label(root, text="Amount of time you wish to block in minutes:").grid(row=4, column=1, pady=2)
+        Label(root, text="Amount of time you wish to block in minutes:").grid(row=4, column=1)
         lockTime = IntVar()
         timeToLock = (Entry(root, textvariable=lockTime))
         timeToLock.grid(row=5, column=1, pady=2)

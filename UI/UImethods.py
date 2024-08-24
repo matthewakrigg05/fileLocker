@@ -1,8 +1,4 @@
 from tkinter import *
-import tkinter.messagebox
-
-from Tools.demo.spreadsheet import center
-
 import checkFiles
 from manipulateList import addToList
 

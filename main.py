@@ -1,6 +1,5 @@
 from tkinter import Tk
 import checkFiles
-
 from UI.mainUI import FileLocker
 
 
