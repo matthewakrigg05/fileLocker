@@ -35,16 +35,13 @@ def unblockWebsites():
 
 
 def runBlock(timeGiven, apps, websites):
-
     if apps.get() == 0 and websites.get() == 0:
         tkinter.messagebox.showinfo("Error", "No options chosen to block")
     else:
-        print(apps.get())
-        print(websites.get())
         if validTimeToBlock(timeGiven.get()):
-            toContinue = input("Are you sure you wish to continue? (Y/N)")
-            if toContinue == "Y" or toContinue == "y":
-                timeToLock = time.time() + timeGiven
+            toContinue = tkinter.messagebox.askyesno("FileLocker", "Are you sure you wish to continue?")
+            if toContinue:
+                timeToLock = time.time() + float(timeGiven.get())
 
                 if apps.get() == 1 and websites.get() == 1:
                     blockWebsites(checkFiles.lockedDomainsContent())
@@ -62,6 +59,5 @@ def runBlock(timeGiven, apps, websites):
                     blockWebsites(checkFiles.lockedDomainsContent())
                     time.sleep(timeGiven)
                     unblockWebsites()
-
         else:
             tkinter.messagebox.showinfo("Error", "Invalid time input!")
