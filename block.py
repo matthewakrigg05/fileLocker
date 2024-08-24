@@ -6,10 +6,11 @@ import checkFiles
 
 def validTimeToBlock(t):
     try:
-        if t.isnumeric():
-            return True
+        int(t)
     except ValueError:
         return False
+    else:
+        return True
 
 
 def closeAppIfDetected(appsToClose):
