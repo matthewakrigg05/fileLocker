@@ -1,3 +1,5 @@
+from contextlib import nullcontext
+
 import checkFiles
 
 
@@ -19,7 +21,11 @@ def clearWebsites():
     websiteFile.close()
 
 
-def addToList(contents, fileToAdd):
+def addToList(fileToAdd):
+    if not fileToAdd:
+        print("No input")
+        return Exception
+
     if ".exe" in fileToAdd:
         file = "textFiles/lockedApps.txt"
     else:
@@ -28,7 +34,7 @@ def addToList(contents, fileToAdd):
     with open(file, 'a') as f:
         itemAlreadyInFile = False
 
-        for item in contents:
+        for item in file:
             if item == fileToAdd:
                 itemAlreadyInFile = True
                 break

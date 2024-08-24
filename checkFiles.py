@@ -6,16 +6,12 @@ def checkForFilesTxt():
     if not os.path.exists('textFiles/lockedApps.txt'):
         with open('textFiles/lockedApps.txt') as f:
             f.close()
-    else:
-        return False
 
 
 def checkForWebTxt():
     if not os.path.exists('textFiles/lockedDomains.txt'):
         with open('textFiles/lockedDomains.txt', 'w') as f:
             f.close()
-    else:
-        return False
 
 
 def checkIfProcessRunning(program):
