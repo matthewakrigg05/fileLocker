@@ -31,9 +31,15 @@ def viewItemsPopUpBox(root):
     top = Toplevel(root)
     top.geometry("250x125")
     top.title("FileLocker: View Items")
+    top.resizable(False, False)
 
     content = checkFiles.lockedContent()
     if len(content) == 0:
-        tkinter.messagebox.showinfo("FileLocker: View Items", "You currently have no applications in your list.")
+        label = Label(top, text="You currently have no applications in your list.")
+        label.pack(pady=5, side=TOP, anchor=NW)
     else:
-        tkinter.messagebox.showinfo("FileLocker: View Items", "Currently your list contains: " + ", ".join(content).replace('\n', ''))
+        label = Label(top,
+                      text=("Currently your list contains: " + ", ".join(content).replace('\n', '')),
+                      wraplength=250,
+                      justify=LEFT)
+        label.pack(side=TOP,  anchor=NW)
