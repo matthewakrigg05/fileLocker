@@ -24,3 +24,5 @@ def addToListPopUpBox(root):
 
     button = Button(top, text="Add to List!", command=lambda: [close_win(top), addToList(itemToAdd.get())])
     button.pack(pady=5, side=TOP)
+
+

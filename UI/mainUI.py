@@ -35,24 +35,18 @@ class FileLocker:
         # Button(root, text="Saved Lists", justify=CENTER).grid(row=5, column=0, pady=5)
 
         Label(root, text="Block Apps and Websites").grid(row=1, column=1, pady=2)
-        blockAppsCheck = Checkbutton(root, text="Block Apps", variable=BooleanVar(), onvalue=True, offvalue=False).grid(
-            row=2,
-            column=1,
-            pady=5)
+        blockApps = IntVar()
+        blockAppsCheck = Checkbutton(root, text="Block Apps", variable=blockApps, onvalue=1, offvalue=0).grid(row=2, column=1, pady=5)
 
-        blockWebsitesCheck = Checkbutton(root, text="Block Websites", variable=BooleanVar(), onvalue=True,
-                                         offvalue=False).grid(row=3,
-                                                              column=1,
-                                                              pady=5)
+        blockSites = IntVar()
+        blockSitesCheck = Checkbutton(root, text="Block Websites", variable=blockSites, onvalue=1, offvalue=0).grid(row=3, column=1, pady=5)
 
         Label(root, text="Amount of time you wish to block in minutes:").grid(row=4, column=1, pady=2)
-        lockTime = IntVar(root)
+        lockTime = IntVar()
         timeToLock = (Entry(root, textvariable=lockTime))
         timeToLock.grid(row=5, column=1, pady=2)
 
-        Button(root, text="Block!", command=partial(block.runBlock, lockTime.get(), blockAppsCheck,
-                                                    blockWebsitesCheck)).grid(row=6,
-                                                                              column=1,
-                                                                              pady=5)
+        Button(root, text="Block!", command=partial(block.runBlock, lockTime, blockApps,
+                                                    blockSites)).grid(row=6, column=1, pady=5)
 
         mainloop()

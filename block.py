@@ -10,7 +10,10 @@ def validTimeToBlock(t):
     except ValueError:
         return False
     else:
-        return True
+        if t == 0:
+            return False
+        else:
+            return True
 
 
 def closeAppIfDetected(appsToClose):
@@ -32,29 +35,33 @@ def unblockWebsites():
 
 
 def runBlock(timeGiven, apps, websites):
-    if validTimeToBlock(timeGiven):
-        toContinue = input("Are you sure you wish to continue? (Y/N)")
-        if toContinue == "Y" or toContinue == "y":
-            timeToLock = time.time() + timeGiven
 
-            if apps and websites:
-                blockWebsites(checkFiles.lockedDomainsContent())
-
-                while time.time() < time:
-                    closeAppIfDetected(checkFiles.lockedAppsContent())
-
-                unblockWebsites()
-
-            elif apps and not websites:
-                while time.time() < timeToLock:
-                    closeAppIfDetected(checkFiles.lockedAppsContent())
-
-            elif websites and not apps:
-                blockWebsites(checkFiles.lockedDomainsContent())
-                time.sleep(timeGiven)
-                unblockWebsites()
-
-            else:
-                return "No options selected"
+    if apps.get() == 0 and websites.get() == 0:
+        tkinter.messagebox.showinfo("Error", "No options chosen to block")
     else:
-        tkinter.messagebox.showinfo("Error", "Invalid time input!")
+        print(apps.get())
+        print(websites.get())
+        if validTimeToBlock(timeGiven.get()):
+            toContinue = input("Are you sure you wish to continue? (Y/N)")
+            if toContinue == "Y" or toContinue == "y":
+                timeToLock = time.time() + timeGiven
+
+                if apps.get() == 1 and websites.get() == 1:
+                    blockWebsites(checkFiles.lockedDomainsContent())
+
+                    while time.time() < time:
+                        closeAppIfDetected(checkFiles.lockedAppsContent())
+
+                    unblockWebsites()
+
+                elif apps.get() == 1 and websites.get() == 0:
+                    while time.time() < timeToLock:
+                        closeAppIfDetected(checkFiles.lockedAppsContent())
+
+                elif websites.get() == 1 and apps.get() == 0:
+                    blockWebsites(checkFiles.lockedDomainsContent())
+                    time.sleep(timeGiven)
+                    unblockWebsites()
+
+        else:
+            tkinter.messagebox.showinfo("Error", "Invalid time input!")
