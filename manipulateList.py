@@ -86,7 +86,8 @@ def removeItem(file, contents):
         print("Item successfully removed from list.")
 
 
-def showList(content):
+def showList():
+    content = checkFiles.lockedContent()
     if len(content) == 0:
         print("You currently have no applications in your list.")
     else:
