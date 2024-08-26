@@ -29,7 +29,7 @@ class FileLocker:
                                                                                                          column=0,
                                                                                                          pady=5)
 
-        Button(root, text="Remove Items from lists").grid(row=4, column=0, pady=5)
+        Button(root, text="Remove Items from lists", command=partial(UImethods.removeItemsPopUpBox, root)).grid(row=4, column=0, pady=5)
 
         # Button(root, text="Saved Lists", justify=CENTER).grid(row=5, column=0, pady=5)
 

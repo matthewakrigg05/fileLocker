@@ -4,9 +4,7 @@ from UI.mainUI import FileLocker
 
 
 def main():
-    checkFiles.checkForFilesTxt()
-    checkFiles.checkForWebTxt()
-
+    checkFiles.checkTxtFiles()
     root = Tk()
     FileLocker(root)
 
