@@ -2,20 +2,14 @@ import os
 import subprocess
 
 
-def checkForFilesTxt():
+def checkTxtFiles():
     if not os.path.exists('textFiles/lockedApps.txt'):
         with open('textFiles/lockedApps.txt') as f:
             f.close()
-    else:
-        return False
 
-
-def checkForWebTxt():
     if not os.path.exists('textFiles/lockedDomains.txt'):
         with open('textFiles/lockedDomains.txt', 'w') as f:
             f.close()
-    else:
-        return False
 
 
 def checkIfProcessRunning(program):
@@ -26,24 +20,8 @@ def checkIfProcessRunning(program):
         return False
 
 
-def lockedContent():
-    filesContents = []
-
-    with open("textFiles/lockedApps.txt", 'r') as file:
-        Lines = file.readlines()
-
-        for line in Lines:
-            strippedLine = line.strip("\n")
-            filesContents.append(strippedLine)
-
-    with open("textFiles/lockedDomains.txt", 'r') as file:
-        Lines = file.readlines()
-
-        for line in Lines:
-            strippedLine = line.strip("\n")
-            filesContents.append(strippedLine)
-
-    return filesContents
+def allLockedContent():
+    return lockedAppsContent() + lockedDomainsContent()
 
 
 def lockedAppsContent():

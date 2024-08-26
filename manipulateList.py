@@ -1,3 +1,5 @@
+import tkinter.messagebox
+
 import checkFiles
 
 
@@ -19,73 +21,54 @@ def clearWebsites():
     websiteFile.close()
 
 
-def addToList(file, contents):
-    match file:
-        case "textFiles/lockedApps.txt":
-            fileToAdd = input(
-                "Please write the .exe (as it would appear in the file explorer) name of the app you wish to add.\n")
+def addToList(fileToAdd):
+    if not fileToAdd:
+        print("No input")
+        return Exception
 
-        case "textFiles/lockedDomains.txt":
-            fileToAdd = input("Please input the website in the form example.com to add it to the list\n")
+    if ".exe" in fileToAdd:
+        file = "textFiles/lockedApps.txt"
+    else:
+        file = "textFiles/lockedDomains.txt"
 
-    with open(file, 'a') as file:
+    with open(file, 'a') as f:
         itemAlreadyInFile = False
 
-        for item in contents:
+        for item in file:
             if item == fileToAdd:
                 itemAlreadyInFile = True
                 break
 
         if itemAlreadyInFile:
             print("This item is already in this file!")
+            return False
         else:
-            file.write(fileToAdd + "\n")
+            f.write(fileToAdd + "\n")
             print("Item added to list!")
+            return True
 
 
-def removeItem(file, contents):
+def removeItem(contents):
     removed = False
 
-    match file:
-        case "textFiles/lockedApps.txt":
-            toRemove = input(
-                "Please write the .exe name of the application you wish to remove from your list (ensure that your"
-                + " choice is written as it is in the text file)\n")
-
-            with open("textFiles/lockedApps.txt", "r+") as file:
-                lines = file.readlines()
-
-                for line in lines:
-                    if line.strip("\n") != toRemove:
-                        file.write(line)
-
-                removed = True
-
-        case "textFiles/lockedDomains.txt":
-            toRemove = input(
-                "Please write the name of the website you wish to remove from your list (ensure that your"
-                + " choice is written as it is in the text file eg. example.com)\n")
-
-            with open("textFiles/lockedDomains.txt", "r+") as f:
-                lines = f.readlines()
-
-                for line in lines:
-                    if line.strip("\n") != toRemove:
-                        f.write(line)
-
-                removed = True
-
-    if not removed:
-        print("Item could not be removed, make sure the case matches and the item does exist in the list.")
+    if ".exe" in contents.get():
+        file = "textFiles/lockedApps.txt"
     else:
-        print("Item successfully removed from list.")
+        file = "textFiles/lockedDomains.txt"
 
+    with open(file, "r+") as file:
+        lines = file.readlines()
+        file.seek(0)
+        for line in lines:
+            if line.strip("\n") != contents.get():
+                file.write(line)
+        file.truncate()
+        removed = True
 
-def showList(content):
-    if len(content) == 0:
-        print("You currently have no applications in your list.")
+    if removed:
+        tkinter.messagebox.showinfo("Success", "Your chosen item was successfully removed from your list!")
     else:
-        print("Currently your list contains: " + ", ".join(content).replace('\n', ''))
+        tkinter.messagebox.showerror("Error", "Item could not be removed")
 
 
 def showBlockedWebsites(websites=checkFiles.lockedDomainsContent()):
