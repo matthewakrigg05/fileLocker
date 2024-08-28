@@ -41,7 +41,7 @@ def runBlock(timeGiven, apps, websites):
         if validTimeToBlock(timeGiven.get()):
             toContinue = tkinter.messagebox.askyesno("FileLocker", "Are you sure you wish to continue?")
             if toContinue:
-                timeToLock = time.time() + float(timeGiven.get())
+                timeToLock = time.time() + timeGiven.get()
 
                 if apps.get() == 1 and websites.get() == 1:
                     blockWebsites(checkFiles.lockedDomainsContent())
@@ -57,7 +57,7 @@ def runBlock(timeGiven, apps, websites):
 
                 elif websites.get() == 1 and apps.get() == 0:
                     blockWebsites(checkFiles.lockedDomainsContent())
-                    time.sleep(timeGiven)
+                    time.sleep(timeGiven.get() * 60)
                     unblockWebsites()
         else:
             tkinter.messagebox.showinfo("Error", "Invalid time input!")
