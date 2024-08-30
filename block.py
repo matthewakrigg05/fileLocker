@@ -61,3 +61,6 @@ def runBlock(timeGiven, apps, websites):
                     unblockWebsites()
         else:
             tkinter.messagebox.showinfo("Error", "Invalid time input!")
+
+# to make this work as i intend, i need to be able to break out of the sleep. for loop for length of seconds
+# and each iteration check if a button is pressed?
