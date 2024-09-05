@@ -5,4 +5,10 @@ Some more ideas I intend to add:
  - save lists of apps/sites that you wish to block?
  - make it so that you can unblock the apps early using a password or passphrase?
  - allow to enable time periods to block things eg during work hours?
- - go through main.py and make all methods available in the UI version
+ - make it so that you can quit processes
+ - be able to close and not crash whilst block is running
+ - create a window for whilst the apps and websites are being blocked
+   - include a timer
+   - be able to close and not crash
+   - be able to close and not have to manually clear hosts file
+ - see if i can change the way the app asks for admin perms
