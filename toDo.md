@@ -7,3 +7,8 @@ Some more ideas I intend to add:
  - allow to enable time periods to block things eg during work hours?
  - make it so that you can quit processes
  - be able to close and not crash whilst block is running
+ - create a window for whilst the apps and websites are being blocked
+   - include a timer
+   - be able to close and not crash
+   - be able to close and not have to manually clear hosts file
+ - see if i can change the way the app asks for admin perms
