@@ -60,13 +60,3 @@ def removeItemsPopUpBox(root):
 
     removeButton = Button(top, text="Remove Item", command=partial(removeItem, itemsBox))
     removeButton.pack(side=BOTTOM, anchor=S, pady=50)
-
-
-def blockingAppsTop(root, t, apps, websites):
-
-    while t:
-        mins, secs = divmod(t, 60)
-        timer = '{:02d}:{:02d}'.format(mins, secs)
-        Label(top, text=timer + "\r")
-        time.sleep(1)
-        t -= 1

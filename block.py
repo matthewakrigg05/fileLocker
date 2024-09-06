@@ -21,8 +21,6 @@ def closeAppIfDetected(appsToClose):
     for apps in appsToClose:
         subprocess.call("TASKKILL /F /IM " + apps, shell=True)
 
-    time.sleep(5)
-
 
 def blockWebsites(websitesToBlock):
     for website in websitesToBlock:
@@ -42,23 +40,26 @@ def runBlock(root, timeGiven, apps, websites):
         if validTimeToBlock(timeGiven.get()):
             toContinue = tkinter.messagebox.askyesno("FileLocker", "Are you sure you wish to continue?")
 
+            timeNow = StringVar()
+
             if toContinue:
-                timeToLock = timeGiven.get()
+                timeToLock = timeGiven.get() * 60
                 top = Toplevel(root)
                 top.geometry("150x150")
                 top.title("FileLocker: Blocking Apps")
                 top.resizable(False, False)
+                timer = Entry(top, width=10, textvariable=timeNow, justify=CENTER)
+                timer.pack(side=TOP, anchor=N)
 
                 if apps.get() == 1 and websites.get() == 1:
                     blockWebsites(checkFiles.lockedDomainsContent())
 
                     while timeToLock:
                         closeAppIfDetected(checkFiles.lockedAppsContent())
-                        mins, secs = divmod(timeGiven, 60)
-                        timer = '{:02d}:{:02d}'.format(mins, secs)
-                        Label(top, text=timer + "\r")
+                        mins, secs = divmod(timeToLock, 60)
+                        timeNow.set('{:02d}:{:02d}'.format(mins, secs))
                         time.sleep(1)
-                        timeGiven -= 1
+                        timeToLock -= 1
 
                     unblockWebsites()
 
@@ -66,22 +67,22 @@ def runBlock(root, timeGiven, apps, websites):
 
                     while timeToLock:
                         closeAppIfDetected(checkFiles.lockedAppsContent())
-                        mins, secs = divmod(timeGiven, 60)
-                        timer = '{:02d}:{:02d}'.format(mins, secs)
-                        Label(top, text=timer + "\r")
+                        mins, secs = divmod(timeToLock, 60)
+                        timeNow.set('{:02d}:{:02d}'.format(mins, secs))
                         time.sleep(1)
-                        timeGiven -= 1
+                        top.update()
+                        timeToLock -= 1
 
                 elif websites.get() == 1 and apps.get() == 0:
                     blockWebsites(checkFiles.lockedDomainsContent())
 
                     while timeToLock:
-                        mins, secs = divmod(timeGiven, 60)
+                        mins, secs = divmod(timeToLock, 60)
                         timer = '{:02d}:{:02d}'.format(mins, secs)
                         Label(top, text=timer + "\r")
                         time.sleep(1)
-                        timeGiven -= 1
+                        timeToLock -= 1
 
                     unblockWebsites()
         else:
-            tkinter.messagebox.showinfo("Error", "Invalid time input!")
+             tkinter.messagebox.showinfo("Error", "Invalid time input!")
