@@ -12,14 +12,6 @@ def checkTxtFiles():
             f.close()
 
 
-def checkIfProcessRunning(program):
-    activePrograms = str(subprocess.check_output('tasklist'))
-    if program in activePrograms:
-        return True
-    else:
-        return False
-
-
 def allLockedContent():
     return lockedAppsContent() + lockedDomainsContent()
 

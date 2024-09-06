@@ -19,7 +19,8 @@ def validTimeToBlock(t):
 
 def closeAppIfDetected(appsToClose):
     for apps in appsToClose:
-        subprocess.call("TASKKILL /F /IM " + apps, shell=True)
+        if apps in str(subprocess.check_output('tasklist')):
+            subprocess.call("TASKKILL /F /IM " + apps, shell=True)
 
 
 def blockWebsites(websitesToBlock):
@@ -39,13 +40,12 @@ def runBlock(root, timeGiven, apps, websites):
     else:
         if validTimeToBlock(timeGiven.get()):
             toContinue = tkinter.messagebox.askyesno("FileLocker", "Are you sure you wish to continue?")
-
             timeNow = StringVar()
 
             if toContinue:
                 timeToLock = timeGiven.get() * 60
                 top = Toplevel(root)
-                top.geometry("150x150")
+                top.geometry("300x300")
                 top.title("FileLocker: Blocking Apps")
                 top.resizable(False, False)
                 timer = Entry(top, width=10, textvariable=timeNow, justify=CENTER)
@@ -55,10 +55,11 @@ def runBlock(root, timeGiven, apps, websites):
                     blockWebsites(checkFiles.lockedDomainsContent())
 
                     while timeToLock:
-                        closeAppIfDetected(checkFiles.lockedAppsContent())
                         mins, secs = divmod(timeToLock, 60)
                         timeNow.set('{:02d}:{:02d}'.format(mins, secs))
                         time.sleep(1)
+                        top.update()
+                        closeAppIfDetected(checkFiles.lockedAppsContent())
                         timeToLock -= 1
 
                     unblockWebsites()
@@ -66,11 +67,11 @@ def runBlock(root, timeGiven, apps, websites):
                 elif apps.get() == 1 and websites.get() == 0:
 
                     while timeToLock:
-                        closeAppIfDetected(checkFiles.lockedAppsContent())
                         mins, secs = divmod(timeToLock, 60)
                         timeNow.set('{:02d}:{:02d}'.format(mins, secs))
                         time.sleep(1)
                         top.update()
+                        closeAppIfDetected(checkFiles.lockedAppsContent())
                         timeToLock -= 1
 
                 elif websites.get() == 1 and apps.get() == 0:
@@ -78,9 +79,9 @@ def runBlock(root, timeGiven, apps, websites):
 
                     while timeToLock:
                         mins, secs = divmod(timeToLock, 60)
-                        timer = '{:02d}:{:02d}'.format(mins, secs)
-                        Label(top, text=timer + "\r")
+                        timeNow.set('{:02d}:{:02d}'.format(mins, secs))
                         time.sleep(1)
+                        top.update()
                         timeToLock -= 1
 
                     unblockWebsites()
