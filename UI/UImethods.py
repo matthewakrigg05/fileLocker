@@ -1,3 +1,4 @@
+import time
 from functools import partial
 from tkinter import *
 from tkinter import ttk
@@ -58,3 +59,17 @@ def removeItemsPopUpBox(root):
 
     removeButton = Button(top, text="Remove Item", command=partial(removeItem, itemsBox))
     removeButton.pack(side=BOTTOM, anchor=S, pady=50)
+
+
+def blockingAppsTop(root, t):
+    top = Toplevel(root)
+    top.geometry("150x150")
+    top.title("FileLocker: Blocking Apps")
+    top.resizable(False, False)
+
+    while t:
+        mins, secs = divmod(t, 60)
+        timer = '{:02d}:{:02d}'.format(mins, secs)
+        Label(top, text=timer + "\r")
+        time.sleep(1)
+        t -= 1

@@ -31,8 +31,6 @@ class FileLocker:
 
         Button(root, text="Remove Items from lists", command=partial(UImethods.removeItemsPopUpBox, root)).grid(row=4, column=0, pady=5)
 
-        # Button(root, text="Saved Lists", justify=CENTER).grid(row=5, column=0, pady=5)
-
         Label(root, text="Block Apps and Websites").grid(row=1, column=1, pady=5)
         blockApps = IntVar()
         Checkbutton(root, text="Block Apps", variable=blockApps, onvalue=1, offvalue=0).grid(row=2, column=1)
