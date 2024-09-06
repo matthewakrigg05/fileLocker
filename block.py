@@ -1,6 +1,7 @@
 import subprocess
 import time
 import tkinter.messagebox
+from tkinter import *
 import checkFiles
 
 
@@ -34,33 +35,53 @@ def unblockWebsites():
         file.close()
 
 
-def runBlock(timeGiven, apps, websites):
+def runBlock(root, timeGiven, apps, websites):
     if apps.get() == 0 and websites.get() == 0:
         tkinter.messagebox.showinfo("Error", "No options chosen to block")
     else:
         if validTimeToBlock(timeGiven.get()):
             toContinue = tkinter.messagebox.askyesno("FileLocker", "Are you sure you wish to continue?")
+
             if toContinue:
-                timeToLock = time.time() + timeGiven.get()
+                timeToLock = timeGiven.get()
+                top = Toplevel(root)
+                top.geometry("150x150")
+                top.title("FileLocker: Blocking Apps")
+                top.resizable(False, False)
 
                 if apps.get() == 1 and websites.get() == 1:
                     blockWebsites(checkFiles.lockedDomainsContent())
 
-                    while time.time() < time:
+                    while timeToLock:
                         closeAppIfDetected(checkFiles.lockedAppsContent())
+                        mins, secs = divmod(timeGiven, 60)
+                        timer = '{:02d}:{:02d}'.format(mins, secs)
+                        Label(top, text=timer + "\r")
+                        time.sleep(1)
+                        timeGiven -= 1
 
                     unblockWebsites()
 
                 elif apps.get() == 1 and websites.get() == 0:
-                    while time.time() < timeToLock:
+
+                    while timeToLock:
                         closeAppIfDetected(checkFiles.lockedAppsContent())
+                        mins, secs = divmod(timeGiven, 60)
+                        timer = '{:02d}:{:02d}'.format(mins, secs)
+                        Label(top, text=timer + "\r")
+                        time.sleep(1)
+                        timeGiven -= 1
 
                 elif websites.get() == 1 and apps.get() == 0:
                     blockWebsites(checkFiles.lockedDomainsContent())
-                    time.sleep(timeGiven.get() * 60)
+
+                    while timeToLock:
+                        mins, secs = divmod(timeGiven, 60)
+                        timer = '{:02d}:{:02d}'.format(mins, secs)
+                        Label(top, text=timer + "\r")
+                        time.sleep(1)
+                        timeGiven -= 1
+
                     unblockWebsites()
         else:
             tkinter.messagebox.showinfo("Error", "Invalid time input!")
-
-# to make this work as i intend, i need to be able to break out of the sleep. for loop for length of seconds
-# and each iteration check if a button is pressed?

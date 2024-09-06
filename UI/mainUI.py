@@ -43,7 +43,7 @@ class FileLocker:
         timeToLock = (Entry(root, textvariable=lockTime))
         timeToLock.grid(row=5, column=1, pady=2)
 
-        Button(root, text="Block!", command=partial(block.runBlock, lockTime, blockApps,
+        Button(root, text="Block!", command=partial(block.runBlock, root, lockTime, blockApps,
                                                     blockSites)).grid(row=6, column=1, pady=50)
 
         mainloop()

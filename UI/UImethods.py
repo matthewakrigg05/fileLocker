@@ -3,6 +3,7 @@ from functools import partial
 from tkinter import *
 from tkinter import ttk
 import checkFiles
+from block import runBlock
 from checkFiles import allLockedContent
 from manipulateList import addToList, removeItem
 
@@ -61,11 +62,7 @@ def removeItemsPopUpBox(root):
     removeButton.pack(side=BOTTOM, anchor=S, pady=50)
 
 
-def blockingAppsTop(root, t):
-    top = Toplevel(root)
-    top.geometry("150x150")
-    top.title("FileLocker: Blocking Apps")
-    top.resizable(False, False)
+def blockingAppsTop(root, t, apps, websites):
 
     while t:
         mins, secs = divmod(t, 60)
