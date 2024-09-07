@@ -11,7 +11,7 @@ def validTimeToBlock(t):
     except ValueError:
         return False
     else:
-        if t == 0:
+        if t <= 0:
             return False
         else:
             return True
@@ -86,4 +86,4 @@ def runBlock(root, timeGiven, apps, websites):
 
                     unblockWebsites()
         else:
-             tkinter.messagebox.showinfo("Error", "Invalid time input!")
+            tkinter.messagebox.showerror("Error", "Invalid time input!")

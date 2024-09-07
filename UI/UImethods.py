@@ -1,9 +1,7 @@
-import time
 from functools import partial
 from tkinter import *
 from tkinter import ttk
 import checkFiles
-from block import runBlock
 from checkFiles import allLockedContent
 from manipulateList import addToList, removeItem
 
