@@ -54,19 +54,22 @@ def runBlock(root, timeGiven, apps, websites):
                 if apps.get() == 1 and websites.get() == 1:
                     blockWebsites(checkFiles.lockedDomainsContent())
 
-                    while timeToLock:
+                    while timeToLock > 0:
                         mins, secs = divmod(timeToLock, 60)
                         timeNow.set('{:02d}:{:02d}'.format(mins, secs))
                         time.sleep(1)
                         top.update()
                         closeAppIfDetected(checkFiles.lockedAppsContent())
                         timeToLock -= 1
+
+                    time.sleep(1)
+                    timeNow.set('00:00')
 
                     unblockWebsites()
 
                 elif apps.get() == 1 and websites.get() == 0:
 
-                    while timeToLock:
+                    while timeToLock > 0:
                         mins, secs = divmod(timeToLock, 60)
                         timeNow.set('{:02d}:{:02d}'.format(mins, secs))
                         time.sleep(1)
@@ -74,15 +77,21 @@ def runBlock(root, timeGiven, apps, websites):
                         closeAppIfDetected(checkFiles.lockedAppsContent())
                         timeToLock -= 1
 
+                    time.sleep(1)
+                    timeNow.set('00:00')
+
                 elif websites.get() == 1 and apps.get() == 0:
                     blockWebsites(checkFiles.lockedDomainsContent())
 
-                    while timeToLock:
+                    while timeToLock > 0:
                         mins, secs = divmod(timeToLock, 60)
                         timeNow.set('{:02d}:{:02d}'.format(mins, secs))
                         time.sleep(1)
                         top.update()
                         timeToLock -= 1
+
+                    time.sleep(1)
+                    timeNow.set('00:00')
 
                     unblockWebsites()
         else:
