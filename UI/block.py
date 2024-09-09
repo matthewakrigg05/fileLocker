@@ -31,11 +31,12 @@ def blockWebsites(websitesToBlock):
 
 
 def unblockWebsites():
-    with open("C:\\Windows\\System32\\drivers\\etc\\hosts", 'w') as file:
+    with open("C:\\Windows\\System32\\drt  ivers\\etc\\hosts", 'w') as file:
         file.close()
 
 
 def unblockEarly(top):
+    unblockWebsites()
     top.destroy()
 
 
@@ -46,6 +47,7 @@ def runBlock(root, timeGiven, apps, websites):
         if validTimeToBlock(timeGiven.get()):
             toContinue = tkinter.messagebox.askyesno("FileLocker", "Are you sure you wish to continue?")
             timeNow = StringVar()
+            unlockedEarly = False
 
             if toContinue:
                 timeToLock = timeGiven.get() * 60
@@ -70,7 +72,6 @@ def runBlock(root, timeGiven, apps, websites):
 
                     time.sleep(1)
                     timeNow.set('00:00')
-
                     unblockWebsites()
 
                 elif apps.get() == 1 and websites.get() == 0:
@@ -98,7 +99,6 @@ def runBlock(root, timeGiven, apps, websites):
 
                     time.sleep(1)
                     timeNow.set('00:00')
-
                     unblockWebsites()
         else:
             tkinter.messagebox.showerror("Error", "Invalid time input!")
