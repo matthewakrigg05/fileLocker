@@ -1,6 +1,7 @@
 import subprocess
 import time
 import tkinter.messagebox
+from functools import partial
 from tkinter import *
 import checkFiles
 
@@ -34,6 +35,10 @@ def unblockWebsites():
         file.close()
 
 
+def unblockEarly(top):
+    top.destroy()
+
+
 def runBlock(root, timeGiven, apps, websites):
     if apps.get() == 0 and websites.get() == 0:
         tkinter.messagebox.showinfo("Error", "No options chosen to block")
@@ -49,6 +54,7 @@ def runBlock(root, timeGiven, apps, websites):
                 top.title("FileLocker: Blocking Apps")
                 top.resizable(False, False)
                 timer = Entry(top, width=10, textvariable=timeNow, justify=CENTER)
+                unblockEarlyButton = Button(top, text="Unblock", justify=CENTER, command=partial(unblockEarly, top))
                 timer.pack(side=TOP, anchor=N)
 
                 if apps.get() == 1 and websites.get() == 1:
