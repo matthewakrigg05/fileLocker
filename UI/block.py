@@ -47,11 +47,12 @@ def runBlock(root, timeGiven, apps, websites):
     else:
         if validTimeToBlock(timeGiven.get()):
             toContinue = tkinter.messagebox.askyesno("FileLocker", "Are you sure you wish to continue?")
-            timeNow = StringVar()
-            unlockedEarly = False
 
             if toContinue:
+                timeNow = StringVar()
+                unlockedEarly = False
                 timeToLock = timeGiven.get() * 60
+
                 top = Toplevel(root)
                 top.geometry("300x300")
                 top.title("FileLocker: Blocking Apps")
@@ -61,10 +62,36 @@ def runBlock(root, timeGiven, apps, websites):
                 timer.pack(side=TOP, anchor=N)
                 unblockEarlyButton.pack(side=BOTTOM, anchor=S)
 
-                if apps.get() == 1 and websites.get() == 1:
+                if websites.get() == 1:
                     blockWebsites(checkFiles.lockedDomainsContent())
 
-                    while timeToLock > 0:
+                    if apps.get() == 1:
+                        while timeToLock > -1:
+                            if not unlockedEarly:
+                                mins, secs = divmod(timeToLock, 60)
+                                timeNow.set('{:02d}:{:02d}'.format(mins, secs))
+                                time.sleep(1)
+                                top.update()
+                                closeAppIfDetected(checkFiles.lockedAppsContent())
+                                timeToLock -= 1
+                            else:
+                                break
+                    else:
+                        while timeToLock > -1:
+                            if not unlockedEarly:
+                                mins, secs = divmod(timeToLock, 60)
+                                timeNow.set('{:02d}:{:02d}'.format(mins, secs))
+                                time.sleep(1)
+                                top.update()
+                                timeToLock -= 1
+                            else:
+                                break
+
+                    timeNow.set('00:00')
+                    unblockWebsites()
+
+                else:
+                    while timeToLock > -1:
                         if not unlockedEarly:
                             mins, secs = divmod(timeToLock, 60)
                             timeNow.set('{:02d}:{:02d}'.format(mins, secs))
@@ -75,41 +102,7 @@ def runBlock(root, timeGiven, apps, websites):
                         else:
                             break
 
-                    time.sleep(1)
-                    timeNow.set('00:00')
-                    unblockWebsites()
-
-                elif apps.get() == 1 and websites.get() == 0:
-
-                    while timeToLock > 0:
-                        if not unlockedEarly:
-                            mins, secs = divmod(timeToLock, 60)
-                            timeNow.set('{:02d}:{:02d}'.format(mins, secs))
-                            time.sleep(1)
-                            top.update()
-                            closeAppIfDetected(checkFiles.lockedAppsContent())
-                            timeToLock -= 1
-                        else:
-                            break
-
-                    time.sleep(1)
                     timeNow.set('00:00')
 
-                elif websites.get() == 1 and apps.get() == 0:
-                    blockWebsites(checkFiles.lockedDomainsContent())
-
-                    while timeToLock > 0:
-                        if not unlockedEarly:
-                            mins, secs = divmod(timeToLock, 60)
-                            timeNow.set('{:02d}:{:02d}'.format(mins, secs))
-                            time.sleep(1)
-                            top.update()
-                            timeToLock -= 1
-                        else:
-                            break
-
-                    time.sleep(1)
-                    timeNow.set('00:00')
-                    unblockWebsites()
         else:
             tkinter.messagebox.showerror("Error", "Invalid time input!")
