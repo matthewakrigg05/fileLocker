@@ -10,7 +10,6 @@ class FileLocker:
         window.protocol("WM_DELETE_WINDOW", lambda arg=window: UImethods.onClose(arg))
         window.geometry("640x360")
         window.resizable(False, False)
-
         window.columnconfigure(0, weight=1)
         window.columnconfigure(1, weight=1)
         window.rowconfigure(0, weight=2)
