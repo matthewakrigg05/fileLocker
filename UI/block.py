@@ -36,9 +36,13 @@ def unblockWebsites():
 
 
 def unblockEarly(top, unlockedEarly):
-    unlockedEarly = True
-    unblockWebsites()
-    top.destroy()
+    areYouSure = tkinter.messagebox.askyesno("FileLocker", "Are you sure you want to unlock your chosen apps/sites early?")
+    if areYouSure:
+        unlockedEarly = True
+        unblockWebsites()
+        top.destroy()
+    else:
+        unlockedEarly = False
 
 
 def runBlock(root, timeGiven, apps, websites):
@@ -55,7 +59,7 @@ def runBlock(root, timeGiven, apps, websites):
 
                 top = Toplevel(root)
                 top.geometry("300x300")
-                top.title("FileLocker: Blocking Apps")
+                top.title("Blocking Apps...")
                 top.resizable(False, False)
                 timer = Entry(top, width=10, textvariable=timeNow, justify=CENTER)
                 unblockEarlyButton = Button(top, text="Unblock", justify=CENTER, command=partial(unblockEarly, top, unlockedEarly))
@@ -87,7 +91,6 @@ def runBlock(root, timeGiven, apps, websites):
                             else:
                                 break
 
-                    timeNow.set('00:00')
                     unblockWebsites()
 
                 else:
@@ -102,7 +105,8 @@ def runBlock(root, timeGiven, apps, websites):
                         else:
                             break
 
-                    timeNow.set('00:00')
+                timeNow.set('00:00')
+                tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
 
         else:
             tkinter.messagebox.showerror("Error", "Invalid time input!")
