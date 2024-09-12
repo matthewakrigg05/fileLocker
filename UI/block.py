@@ -80,6 +80,9 @@ def runBlock(root, timeGiven, apps, websites):
                                 timeToLock -= 1
                             else:
                                 break
+                        timeNow.set('00:00')
+                        tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
+
                     else:
                         while timeToLock > -1:
                             if not unlockedEarly:
@@ -92,6 +95,8 @@ def runBlock(root, timeGiven, apps, websites):
                                 break
 
                     unblockWebsites()
+                    timeNow.set('00:00')
+                    tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
 
                 else:
                     while timeToLock > -1:
@@ -104,9 +109,8 @@ def runBlock(root, timeGiven, apps, websites):
                             timeToLock -= 1
                         else:
                             break
-
-                timeNow.set('00:00')
-                tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
+                    timeNow.set('00:00')
+                    tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
 
         else:
             tkinter.messagebox.showerror("Error", "Invalid time input!")
