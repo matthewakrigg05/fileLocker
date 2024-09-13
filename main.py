@@ -4,12 +4,9 @@ from UI.mainUI import FileLocker
 from elevate import elevate
 
 
-def main():
+if __name__ == '__main__':
     elevate()
     checkFiles.checkTxtFiles()
     root = Tk()
-    FileLocker(root)
-
-
-if __name__ == '__main__':
-    main()
+    app = FileLocker(root)
+    root.mainloop()
