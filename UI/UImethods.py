@@ -6,12 +6,6 @@ from checkFiles import allLockedContent
 from manipulateList import addToList, removeItem
 
 
-def onClose(root):
-    with open("C:\\Windows\\System32\\drivers\\etc\\hosts", 'w') as file:
-        file.close()
-    root.destroy()
-
-
 def close_win(top):
     top.destroy()
 
