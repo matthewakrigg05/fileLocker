@@ -11,14 +11,13 @@ class viewItemsFrame(Toplevel):
         self.title("FileLocker: View Items")
         self.resizable(False, False)
         self.protocol("WM_DELETE_WINDOW", lambda arg=self: self.onClose())
-        content = checkFiles.allLockedContent()
 
-        if len(content) == 0:
+        if len(checkFiles.allLockedContent()) == 0:
             label = Label(self, text="You currently have no applications in your list.")
             label.pack(pady=5, side=TOP, anchor=NW)
         else:
             label = Label(self,
-                          text=("Currently your lists contain: " + ", ".join(content).replace('\n', '')),
+                          text=("Currently your lists contain: " + ", ".join(checkFiles.allLockedContent()).replace('\n', '')),
                           wraplength=250,
                           justify=LEFT)
             label.pack(side=TOP, anchor=CENTER)

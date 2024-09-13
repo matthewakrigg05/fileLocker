@@ -51,15 +51,11 @@ class runBlockFrame(Toplevel):
                         timeNow.set('{:02d}:{:02d}'.format(mins, secs))
                         time.sleep(1)
                         self.update()
-                        closeAppIfDetected(checkFiles.lockedAppsContent())
+                        closeAppIfDetected()
                         timeGiven -= 1
                     else:
                         self.onClose()
                         break
-
-                if timeGiven == -1:
-                    timeNow.set('00:00')
-                    tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
 
             else:
                 while timeGiven > -1:
@@ -74,9 +70,6 @@ class runBlockFrame(Toplevel):
                         break
 
             unblockWebsites()
-            if timeGiven == -1:
-                timeNow.set('00:00')
-                tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
 
         else:
             while timeGiven > -1:
@@ -85,12 +78,12 @@ class runBlockFrame(Toplevel):
                     timeNow.set('{:02d}:{:02d}'.format(mins, secs))
                     time.sleep(1)
                     self.update()
-                    closeAppIfDetected(checkFiles.lockedAppsContent())
+                    closeAppIfDetected()
                     timeGiven -= 1
                 else:
                     self.onClose()
                     break
 
-            if timeGiven == -1:
-                timeNow.set('00:00')
-                tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
+        if timeGiven == -1:
+            timeNow.set('00:00')
+            tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")

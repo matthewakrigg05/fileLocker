@@ -1,5 +1,7 @@
 import subprocess
 
+import checkFiles
+
 
 def validTimeToBlock(t):
     try:
@@ -13,8 +15,8 @@ def validTimeToBlock(t):
             return True
 
 
-def closeAppIfDetected(appsToClose):
-    for apps in appsToClose:
+def closeAppIfDetected():
+    for apps in checkFiles.lockedAppsContent():
         if apps in str(subprocess.check_output('tasklist')):
             subprocess.call("TASKKILL /F /IM " + apps, shell=True)
 

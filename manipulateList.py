@@ -1,14 +1,10 @@
 import tkinter.messagebox
-
 import checkFiles
 
 
 def clearLists():
-    appsFile = open("textFiles/lockedApps.txt", 'w')
-    appsFile.close()
-
-    websiteFile = open("textFiles/lockedDomains.txt", "w")
-    websiteFile.close()
+    clearApps()
+    clearWebsites()
 
 
 def clearApps():
@@ -22,13 +18,12 @@ def clearWebsites():
 
 
 def addToList(fileToAdd):
-    itemToAdd = fileToAdd.get()
 
-    if not itemToAdd:
+    if not fileToAdd.get():
         tkinter.messagebox.showerror("Error", "No input was provided.")
         return Exception
 
-    if ".exe" in itemToAdd:
+    if ".exe" in fileToAdd.get():
         file = "textFiles/lockedApps.txt"
     else:
         file = "textFiles/lockedDomains.txt"
@@ -37,7 +32,7 @@ def addToList(fileToAdd):
         txt = f.readlines()
 
         for line in txt:
-            if itemToAdd in line:
+            if fileToAdd.get() in line:
                 itemAlreadyInFile = True
                 break
             else:
@@ -46,7 +41,7 @@ def addToList(fileToAdd):
         if itemAlreadyInFile:
             tkinter.messagebox.showerror("Error", "This item is already in this file!")
         else:
-            f.write(itemToAdd + "\n")
+            f.write(fileToAdd.get() + "\n")
             tkinter.messagebox.showinfo("Item Added", "Your item was successfully added to the correct file!")
 
 
