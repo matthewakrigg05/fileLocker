@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 from functools import partial
 from UI import UImethods
+from UI.addToListFrame import addToListFrame
 from UI.runBlockFrame import runBlockFrame
 from block import validTimeToBlock
 
@@ -25,7 +26,7 @@ class FileLocker(object):
                                                                                                              column=0,
                                                                                                              pady=3)
 
-        Button(self.frame, text="Add Items to lists", command=partial(UImethods.addToListPopUpBox, self.frame)).grid(
+        Button(self.frame, text="Add Items to lists", command=partial(self.openAddFrame)).grid(
             row=3,
             column=0,
             pady=5)
@@ -54,9 +55,13 @@ class FileLocker(object):
     def hide(self):
         self.root.withdraw()
 
-    def openFrame(self, lockTime, blockApps, blockSites):
+    def openBlockFrame(self, lockTime, blockApps, blockSites):
         self.hide()
         runBlockFrame(self, lockTime, blockApps, blockSites)
+
+    def openAddFrame(self):
+        self.hide()
+        addToListFrame(self)
 
     def onCloseOtherFrame(self, otherFrame):
         otherFrame.destroy()
@@ -78,6 +83,6 @@ class FileLocker(object):
             if validTimeToBlock(lockTime.get()):
                 toContinue = tkinter.messagebox.askyesno("FileLocker", "Are you sure you wish to continue?")
                 if toContinue:
-                    self.openFrame(lockTime, blockApps, blockSites)
+                    self.openBlockFrame(lockTime, blockApps, blockSites)
             else:
                 tkinter.messagebox.showerror("Error", "Invalid time input!")

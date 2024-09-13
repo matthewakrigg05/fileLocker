@@ -11,7 +11,7 @@ from block import blockWebsites, closeAppIfDetected, unblockWebsites
 class runBlockFrame(Toplevel):
 
     def __init__(self, mainFrame, lockTime, blockApps, blockSites):
-        Toplevel.__init__(self)
+        super().__init__(self)
         self.original_frame = mainFrame
         self.geometry("300x300")
         self.title("Blocking Apps...")

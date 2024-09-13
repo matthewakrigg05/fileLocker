@@ -15,19 +15,6 @@ def unblockEarly(unlockedEarly):
         unlockedEarly.set(True)
 
 
-def addToListPopUpBox(root):
-    top = Toplevel(root)
-    top.geometry("250x125")
-    top.title("FileLocker: Add to list")
-
-    itemToAdd = StringVar(root)
-    entry = Entry(top, width=25, textvariable=itemToAdd)
-    entry.pack(pady=25, side=TOP)
-
-    button = Button(top, text="Add to List!", command= addToList(itemToAdd.get()))
-    button.pack(pady=5, side=TOP)
-
-
 def viewItemsPopUpBox(root):
     top = Toplevel(root)
     top.geometry("250x125")
