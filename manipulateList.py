@@ -25,7 +25,7 @@ def addToList(fileToAdd):
     itemToAdd = fileToAdd.get()
 
     if not itemToAdd:
-        print("No input")
+        tkinter.messagebox.showerror("Error", "No input was provided.")
         return Exception
 
     if ".exe" in itemToAdd:
@@ -73,13 +73,13 @@ def removeItem(contents):
 
 def showBlockedWebsites(websites=checkFiles.lockedDomainsContent()):
     if not websites:
-        print("You currently have no websites in your list.")
+        tkinter.messagebox.showinfo("Websites", "You currently have no websites in your list.")
     else:
-        print("Currently your websites list contains: " + ", ".join(websites).replace('\n', ''))
+        tkinter.messagebox.showinfo("Websites", "Currently your websites list contains: " + ", ".join(websites).replace('\n', ''))
 
 
 def showBlockedApps(apps=checkFiles.lockedAppsContent()):
     if not apps:
-        print("You currently have no apps in your list.")
+        tkinter.messagebox.showinfo("Apps", "You currently have no apps in your list.")
     else:
-        print("Currently your apps list contains: " + ", ".join(apps).replace('\n', ''))
+        tkinter.messagebox.showinfo("Apps", "Currently your apps list contains: " + ", ".join(apps).replace('\n', ''))
