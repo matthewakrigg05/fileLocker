@@ -41,34 +41,33 @@ class runBlockFrame(Toplevel):
         self.original_frame.show()
 
     def runBlock(self, timeGiven, apps, websites, unlockedEarly, timeNow):
-        if websites == 1:
-            blockWebsites(checkFiles.lockedDomainsContent())
+        if websites == 1 and apps == 1:
+            blockWebsites()
+            while timeGiven > -1:
+                if not unlockedEarly.get():
+                    mins, secs = divmod(timeGiven, 60)
+                    timeNow.set('{:02d}:{:02d}'.format(mins, secs))
+                    time.sleep(1)
+                    self.update()
+                    closeAppIfDetected()
+                    timeGiven -= 1
+                else:
+                    self.onClose()
+                    break
+            unblockWebsites()
 
-            if apps == 1:
-                while timeGiven > -1:
-                    if not unlockedEarly.get():
-                        mins, secs = divmod(timeGiven, 60)
-                        timeNow.set('{:02d}:{:02d}'.format(mins, secs))
-                        time.sleep(1)
-                        self.update()
-                        closeAppIfDetected()
-                        timeGiven -= 1
-                    else:
-                        self.onClose()
-                        break
-
-            else:
-                while timeGiven > -1:
-                    if not unlockedEarly.get():
-                        mins, secs = divmod(timeGiven, 60)
-                        timeNow.set('{:02d}:{:02d}'.format(mins, secs))
-                        time.sleep(1)
-                        self.update()
-                        timeGiven -= 1
-                    else:
-                        self.onClose()
-                        break
-
+        elif websites == 1 and apps == 0:
+            blockWebsites()
+            while timeGiven > -1:
+                if not unlockedEarly.get():
+                    mins, secs = divmod(timeGiven, 60)
+                    timeNow.set('{:02d}:{:02d}'.format(mins, secs))
+                    time.sleep(1)
+                    self.update()
+                    timeGiven -= 1
+                else:
+                    self.onClose()
+                    break
             unblockWebsites()
 
         else:
