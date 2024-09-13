@@ -15,24 +15,6 @@ def unblockEarly(unlockedEarly):
         unlockedEarly.set(True)
 
 
-def viewItemsPopUpBox(root):
-    top = Toplevel(root)
-    top.geometry("250x125")
-    top.title("FileLocker: View Items")
-    top.resizable(False, False)
-
-    content = checkFiles.allLockedContent()
-    if len(content) == 0:
-        label = Label(top, text="You currently have no applications in your list.")
-        label.pack(pady=5, side=TOP, anchor=NW)
-    else:
-        label = Label(top,
-                      text=("Currently your lists contain: " + ", ".join(content).replace('\n', '')),
-                      wraplength=250,
-                      justify=LEFT)
-        label.pack(side=TOP,  anchor=CENTER)
-
-
 def removeItemsPopUpBox(root):
     top = Toplevel(root)
     top.geometry("300x200")

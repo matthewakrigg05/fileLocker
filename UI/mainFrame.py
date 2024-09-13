@@ -5,6 +5,7 @@ from functools import partial
 from UI import UImethods
 from UI.addToListFrame import addToListFrame
 from UI.runBlockFrame import runBlockFrame
+from UI.viewItemsFrame import viewItemsFrame
 from block import validTimeToBlock
 
 
@@ -22,11 +23,11 @@ class FileLocker(object):
         Label(self.frame, text="File Locker", justify=CENTER).grid(row=0, columnspan=2, sticky=N)
 
         Label(self.frame, text="Manipulate Lists").grid(row=1, column=0, padx=100)
-        Button(self.frame, text="View Items", command=partial(UImethods.viewItemsPopUpBox, self.frame)).grid(row=2,
-                                                                                                             column=0,
-                                                                                                             pady=3)
+        Button(self.frame, text="View Items", command=self.openViewFrame).grid(row=2,
+                                                                               column=0,
+                                                                               pady=3)
 
-        Button(self.frame, text="Add Items to lists", command=partial(self.openAddFrame)).grid(
+        Button(self.frame, text="Add Items to lists", command=self.openAddFrame).grid(
             row=3,
             column=0,
             pady=5)
@@ -62,6 +63,10 @@ class FileLocker(object):
     def openAddFrame(self):
         self.hide()
         addToListFrame(self)
+
+    def openViewFrame(self):
+        self.hide()
+        viewItemsFrame(self)
 
     def onCloseOtherFrame(self, otherFrame):
         otherFrame.destroy()

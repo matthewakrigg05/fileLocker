@@ -1,6 +1,5 @@
 from functools import partial
 from tkinter import *
-
 from manipulateList import addToList
 
 
@@ -11,6 +10,7 @@ class addToListFrame(Toplevel):
         self.original_frame = mainFrame
         self.geometry("250x125")
         self.title("FileLocker: Add to list")
+        self.resizable(False, False)
 
         itemToAdd = StringVar()
         entry = Entry(self, width=25, textvariable=itemToAdd)
