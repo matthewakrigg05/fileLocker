@@ -33,13 +33,3 @@ def blockWebsites(websitesToBlock):
 def unblockWebsites():
     with open("C:\\Windows\\System32\\drivers\\etc\\hosts", 'w') as file:
         file.close()
-
-
-def unblockEarly(top, unlockedEarly):
-    areYouSure = tkinter.messagebox.askyesno("FileLocker", "Are you sure you want to unlock your chosen apps/sites early?")
-    if areYouSure:
-        unlockedEarly = True
-        unblockWebsites()
-        top.destroy()
-    else:
-        unlockedEarly = False

@@ -6,7 +6,7 @@ from functools import partial
 
 import checkFiles
 from UI import UImethods
-from UI.block import unblockEarly, validTimeToBlock, blockWebsites, closeAppIfDetected, unblockWebsites
+from UI.block import validTimeToBlock, blockWebsites, closeAppIfDetected, unblockWebsites
 
 
 class FileLocker(object):
@@ -48,7 +48,7 @@ class FileLocker(object):
         timeToLock = (Entry(self.frame, textvariable=lockTime))
         timeToLock.grid(row=5, column=1, pady=2)
 
-        Button(self.frame, text="Block!", command=partial(self.openFrame, lockTime, blockApps,
+        Button(self.frame, text="Block!", command=partial(self.checkInputs, lockTime, blockApps,
                                                           blockSites)).grid(row=6, column=1, pady=50)
 
         self.frame.pack()
@@ -73,6 +73,17 @@ class FileLocker(object):
             file.close()
         self.root.destroy()
 
+    def checkInputs(self, lockTime, blockApps, blockSites):
+        if blockApps.get() == 0 and blockSites.get == 0:
+            tkinter.messagebox.showinfo("Error", "No options chosen to block")
+        else:
+            if validTimeToBlock(lockTime.get()):
+                toContinue = tkinter.messagebox.askyesno("FileLocker", "Are you sure you wish to continue?")
+                if toContinue:
+                    self.openFrame(lockTime, blockApps, blockSites)
+            else:
+                tkinter.messagebox.showerror("Error", "Invalid time input!")
+
 
 class runBlockFrame(Toplevel):
 
@@ -89,15 +100,21 @@ class runBlockFrame(Toplevel):
         blockSites = blockSites.get()
 
         timeNow = StringVar()
-        unlockedEarly = False
+        unlockedEarly = BooleanVar()
 
         timer = Entry(self, width=10, textvariable=timeNow, justify=CENTER)
         unblockEarlyButton = Button(self, text="Unblock", justify=CENTER,
-                                    command=partial(unblockEarly, self, unlockedEarly))
+                                    command=partial(self.unblockEarly, unlockedEarly))
         timer.pack(side=TOP, anchor=N)
         unblockEarlyButton.pack(side=BOTTOM, anchor=S)
 
         self.runBlock(lockTime, blockApps, blockSites, unlockedEarly, timeNow)
+
+    def unblockEarly(self, unlockedEarly):
+        areYouSure = tkinter.messagebox.askyesno("FileLocker",
+                                                 "Are you sure you want to unlock your chosen apps/sites early?")
+        if areYouSure:
+            unlockedEarly.set(True)
 
     def onClose(self):
         with open("C:\\Windows\\System32\\drivers\\etc\\hosts", 'w') as file:
@@ -106,59 +123,53 @@ class runBlockFrame(Toplevel):
         self.original_frame.show()
 
     def runBlock(self, timeGiven, apps, websites, unlockedEarly, timeNow):
-        if apps == 0 and websites == 0:
-            tkinter.messagebox.showinfo("Error", "No options chosen to block")
-        else:
-            if validTimeToBlock(timeGiven):
-                toContinue = tkinter.messagebox.askyesno("FileLocker", "Are you sure you wish to continue?")
+        if websites == 1:
+            blockWebsites(checkFiles.lockedDomainsContent())
 
-                if toContinue:
-                    if websites == 1:
-                        blockWebsites(checkFiles.lockedDomainsContent())
-
-                        if apps == 1:
-                            while timeGiven > -1:
-                                if not unlockedEarly:
-                                    mins, secs = divmod(timeGiven, 60)
-                                    timeNow.set('{:02d}:{:02d}'.format(mins, secs))
-                                    time.sleep(1)
-                                    self.update()
-                                    closeAppIfDetected(checkFiles.lockedAppsContent())
-                                    timeGiven -= 1
-                                else:
-                                    break
-                            timeNow.set('00:00')
-                            tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
-
-                        else:
-                            while timeGiven > -1:
-                                if not unlockedEarly:
-                                    mins, secs = divmod(timeGiven, 60)
-                                    timeNow.set('{:02d}:{:02d}'.format(mins, secs))
-                                    time.sleep(1)
-                                    self.update()
-                                    timeGiven -= 1
-                                else:
-                                    break
-
-                        unblockWebsites()
-                        timeNow.set('00:00')
-                        tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
-
+            if apps == 1:
+                while timeGiven > -1:
+                    if not unlockedEarly.get():
+                        mins, secs = divmod(timeGiven, 60)
+                        timeNow.set('{:02d}:{:02d}'.format(mins, secs))
+                        time.sleep(1)
+                        self.update()
+                        closeAppIfDetected(checkFiles.lockedAppsContent())
+                        timeGiven -= 1
                     else:
-                        while timeGiven > -1:
-                            if not unlockedEarly:
-                                mins, secs = divmod(timeGiven, 60)
-                                timeNow.set('{:02d}:{:02d}'.format(mins, secs))
-                                time.sleep(1)
-                                self.update()
-                                closeAppIfDetected(checkFiles.lockedAppsContent())
-                                timeGiven -= 1
-                            else:
-                                break
-                        timeNow.set('00:00')
-                        tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
+                        self.onClose()
+                        break
+
+                timeNow.set('00:00')
+                tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
 
             else:
-                tkinter.messagebox.showerror("Error", "Invalid time input!")
+                while timeGiven > -1:
+                    if not unlockedEarly.get():
+                        mins, secs = divmod(timeGiven, 60)
+                        timeNow.set('{:02d}:{:02d}'.format(mins, secs))
+                        time.sleep(1)
+                        self.update()
+                        timeGiven -= 1
+                    else:
+                        self.onClose()
+                        break
 
+            unblockWebsites()
+            timeNow.set('00:00')
+            tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
+
+        else:
+            while timeGiven > -1:
+                if not unlockedEarly.get():
+                    mins, secs = divmod(timeGiven, 60)
+                    timeNow.set('{:02d}:{:02d}'.format(mins, secs))
+                    time.sleep(1)
+                    self.update()
+                    closeAppIfDetected(checkFiles.lockedAppsContent())
+                    timeGiven -= 1
+                else:
+                    self.onClose()
+                    break
+
+            timeNow.set('00:00')
+            tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
