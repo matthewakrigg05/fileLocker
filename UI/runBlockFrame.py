@@ -3,7 +3,6 @@ import tkinter
 from tkinter import *
 from tkinter import messagebox
 from functools import partial
-import checkFiles
 from UI.UImethods import unblockEarly
 from block import blockWebsites, closeAppIfDetected, unblockWebsites
 
@@ -21,7 +20,6 @@ class runBlockFrame(Toplevel):
         lockTime = lockTime.get() * 60
         blockApps = blockApps.get()
         blockSites = blockSites.get()
-
         timeNow = StringVar()
         unlockedEarly = BooleanVar()
 

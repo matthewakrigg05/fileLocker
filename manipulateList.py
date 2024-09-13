@@ -1,5 +1,4 @@
 import tkinter.messagebox
-import checkFiles
 
 
 def clearLists():
@@ -64,17 +63,3 @@ def removeItem(contents):
         tkinter.messagebox.showinfo("Success", "Your chosen item was successfully removed from your list!")
     else:
         tkinter.messagebox.showerror("Error", "Item could not be removed")
-
-
-def showBlockedWebsites(websites=checkFiles.lockedDomainsContent()):
-    if not websites:
-        tkinter.messagebox.showinfo("Websites", "You currently have no websites in your list.")
-    else:
-        tkinter.messagebox.showinfo("Websites", "Currently your websites list contains: " + ", ".join(websites).replace('\n', ''))
-
-
-def showBlockedApps(apps=checkFiles.lockedAppsContent()):
-    if not apps:
-        tkinter.messagebox.showinfo("Apps", "You currently have no apps in your list.")
-    else:
-        tkinter.messagebox.showinfo("Apps", "Currently your apps list contains: " + ", ".join(apps).replace('\n', ''))
