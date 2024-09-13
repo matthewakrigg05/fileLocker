@@ -1,6 +1,6 @@
 from tkinter import Tk
 import checkFiles
-from UI.mainUI import FileLocker
+from UI.mainFrame import FileLocker
 from elevate import elevate
 
 

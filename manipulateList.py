@@ -22,35 +22,35 @@ def clearWebsites():
 
 
 def addToList(fileToAdd):
-    if not fileToAdd:
-        print("No input")
+    itemToAdd = fileToAdd.get()
+
+    if not itemToAdd:
+        tkinter.messagebox.showerror("Error", "No input was provided.")
         return Exception
 
-    if ".exe" in fileToAdd:
+    if ".exe" in itemToAdd:
         file = "textFiles/lockedApps.txt"
     else:
         file = "textFiles/lockedDomains.txt"
 
-    with open(file, 'a') as f:
-        itemAlreadyInFile = False
+    with open(file, 'r+') as f:
+        txt = f.readlines()
 
-        for item in file:
-            if item == fileToAdd:
+        for line in txt:
+            if itemToAdd in line:
                 itemAlreadyInFile = True
                 break
+            else:
+                itemAlreadyInFile = False
 
         if itemAlreadyInFile:
-            print("This item is already in this file!")
-            return False
+            tkinter.messagebox.showerror("Error", "This item is already in this file!")
         else:
-            f.write(fileToAdd + "\n")
-            print("Item added to list!")
-            return True
+            f.write(itemToAdd + "\n")
+            tkinter.messagebox.showinfo("Item Added", "Your item was successfully added to the correct file!")
 
 
 def removeItem(contents):
-    removed = False
-
     if ".exe" in contents.get():
         file = "textFiles/lockedApps.txt"
     else:
@@ -72,14 +72,14 @@ def removeItem(contents):
 
 
 def showBlockedWebsites(websites=checkFiles.lockedDomainsContent()):
-    if len(websites) == 0:
-        print("You currently have no websites in your list.")
+    if not websites:
+        tkinter.messagebox.showinfo("Websites", "You currently have no websites in your list.")
     else:
-        print("Currently your websites list contains: " + ", ".join(websites).replace('\n', ''))
+        tkinter.messagebox.showinfo("Websites", "Currently your websites list contains: " + ", ".join(websites).replace('\n', ''))
 
 
 def showBlockedApps(apps=checkFiles.lockedAppsContent()):
-    if len(apps) == 0:
-        print("You currently have no apps in your list.")
+    if not apps:
+        tkinter.messagebox.showinfo("Apps", "You currently have no apps in your list.")
     else:
-        print("Currently your apps list contains: " + ", ".join(apps).replace('\n', ''))
+        tkinter.messagebox.showinfo("Apps", "Currently your apps list contains: " + ", ".join(apps).replace('\n', ''))
