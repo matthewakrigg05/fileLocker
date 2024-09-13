@@ -1,13 +1,18 @@
+import tkinter
 from functools import partial
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 import checkFiles
 from checkFiles import allLockedContent
 from manipulateList import addToList, removeItem
 
 
-def close_win(top):
-    top.destroy()
+def unblockEarly(unlockedEarly):
+    areYouSure = tkinter.messagebox.askyesno("FileLocker",
+                                             "Are you sure you want to unlock your chosen apps/sites early?")
+    if areYouSure:
+        unlockedEarly.set(True)
 
 
 def addToListPopUpBox(root):
@@ -19,7 +24,7 @@ def addToListPopUpBox(root):
     entry = Entry(top, width=25, textvariable=itemToAdd)
     entry.pack(pady=25, side=TOP)
 
-    button = Button(top, text="Add to List!", command=lambda: [close_win(top), addToList(itemToAdd.get())])
+    button = Button(top, text="Add to List!", command= addToList(itemToAdd.get()))
     button.pack(pady=5, side=TOP)
 
 

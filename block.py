@@ -1,9 +1,4 @@
 import subprocess
-import time
-import tkinter.messagebox
-from functools import partial
-from tkinter import *
-import checkFiles
 
 
 def validTimeToBlock(t):
