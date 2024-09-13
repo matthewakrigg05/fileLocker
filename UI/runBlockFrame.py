@@ -11,9 +11,9 @@ from block import blockWebsites, closeAppIfDetected, unblockWebsites
 class runBlockFrame(Toplevel):
 
     def __init__(self, mainFrame, lockTime, blockApps, blockSites):
-        super().__init__(self)
+        super().__init__()
         self.original_frame = mainFrame
-        self.geometry("300x300")
+        self.geometry("300x150")
         self.title("Blocking Apps...")
         self.resizable(False, False)
         self.protocol("WM_DELETE_WINDOW", lambda arg=self: self.onClose())
@@ -26,10 +26,11 @@ class runBlockFrame(Toplevel):
         unlockedEarly = BooleanVar()
 
         timer = Entry(self, width=10, textvariable=timeNow, justify=CENTER)
+        timer.pack(side=TOP, anchor=N, pady=20)
+
         unblockEarlyButton = Button(self, text="Unblock", justify=CENTER,
                                     command=partial(unblockEarly, unlockedEarly))
-        timer.pack(side=TOP, anchor=N)
-        unblockEarlyButton.pack(side=BOTTOM, anchor=S)
+        unblockEarlyButton.pack(side=BOTTOM, anchor=S, pady=20)
 
         self.runBlock(lockTime, blockApps, blockSites, unlockedEarly, timeNow)
 
