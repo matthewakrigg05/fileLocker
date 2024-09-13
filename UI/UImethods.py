@@ -7,4 +7,3 @@ def unblockEarly(unlockedEarly):
                                              "Are you sure you want to unlock your chosen apps/sites early?")
     if areYouSure:
         unlockedEarly.set(True)
-
