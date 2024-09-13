@@ -1,5 +1,4 @@
 import os
-import subprocess
 
 
 def checkTxtFiles():
@@ -10,14 +9,6 @@ def checkTxtFiles():
     if not os.path.exists('textFiles/lockedDomains.txt'):
         with open('textFiles/lockedDomains.txt', 'w') as f:
             f.close()
-
-
-def checkIfProcessRunning(program):
-    activePrograms = str(subprocess.check_output('tasklist'))
-    if program in activePrograms:
-        return True
-    else:
-        return False
 
 
 def allLockedContent():
