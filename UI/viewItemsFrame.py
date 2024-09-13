@@ -10,6 +10,7 @@ class viewItemsFrame(Toplevel):
         self.geometry("250x125")
         self.title("FileLocker: View Items")
         self.resizable(False, False)
+        self.protocol("WM_DELETE_WINDOW", self.onClose())
         content = checkFiles.allLockedContent()
 
         if len(content) == 0:
@@ -21,3 +22,7 @@ class viewItemsFrame(Toplevel):
                           wraplength=250,
                           justify=LEFT)
             label.pack(side=TOP, anchor=CENTER)
+
+    def onClose(self):
+        self.destroy()
+        self.original_frame.show()

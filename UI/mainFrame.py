@@ -2,8 +2,8 @@ import tkinter
 from tkinter import *
 from tkinter import messagebox
 from functools import partial
-from UI import UImethods
 from UI.addToListFrame import addToListFrame
+from UI.removeItemsFrame import removeItemsFrame
 from UI.runBlockFrame import runBlockFrame
 from UI.viewItemsFrame import viewItemsFrame
 from block import validTimeToBlock
@@ -33,7 +33,7 @@ class FileLocker(object):
             pady=5)
 
         Button(self.frame, text="Remove Items from lists",
-               command=partial(UImethods.removeItemsPopUpBox, self.frame)).grid(
+               command= self.openRemoveFrame).grid(
             row=4, column=0, pady=5)
 
         Label(self.frame, text="Block Apps and Websites").grid(row=1, column=1, pady=5, padx=100)
@@ -63,6 +63,10 @@ class FileLocker(object):
     def openAddFrame(self):
         self.hide()
         addToListFrame(self)
+
+    def openRemoveFrame(self):
+        self.hide()
+        removeItemsFrame(self)
 
     def openViewFrame(self):
         self.hide()

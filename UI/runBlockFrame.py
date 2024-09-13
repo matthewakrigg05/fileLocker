@@ -16,7 +16,7 @@ class runBlockFrame(Toplevel):
         self.geometry("300x300")
         self.title("Blocking Apps...")
         self.resizable(False, False)
-        self.protocol("WM_DELETE_WINDOW", lambda arg=self: self.onClose())
+        self.protocol("WM_DELETE_WINDOW", self.onClose())
 
         lockTime = lockTime.get() * 60
         blockApps = blockApps.get()
