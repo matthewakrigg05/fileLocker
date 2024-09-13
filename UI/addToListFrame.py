@@ -11,13 +11,13 @@ class addToListFrame(Toplevel):
         self.geometry("250x125")
         self.title("FileLocker: Add to list")
         self.resizable(False, False)
-        self.protocol("WM_DELETE_WINDOW", self.onClose())
+        self.protocol("WM_DELETE_WINDOW", lambda arg=self: self.onClose())
 
         itemToAdd = StringVar()
         entry = Entry(self, width=25, textvariable=itemToAdd)
         entry.pack(pady=25, side=TOP)
 
-        button = Button(self, text="Add to List!", command=partial(addToList, itemToAdd.get()))
+        button = Button(self, text="Add to List!", command=partial(addToList, itemToAdd))
         button.pack(pady=5, side=TOP)
 
     def onClose(self):

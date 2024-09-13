@@ -10,7 +10,7 @@ class viewItemsFrame(Toplevel):
         self.geometry("250x125")
         self.title("FileLocker: View Items")
         self.resizable(False, False)
-        self.protocol("WM_DELETE_WINDOW", self.onClose())
+        self.protocol("WM_DELETE_WINDOW", lambda arg=self: self.onClose())
         content = checkFiles.allLockedContent()
 
         if len(content) == 0:

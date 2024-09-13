@@ -15,7 +15,7 @@ class removeItemsFrame(Toplevel):
         self.geometry("300x200")
         self.title("FileLocker: Remove Items")
         self.resizable(False, False)
-        self.protocol("WM_DELETE_WINDOW", self.onClose())
+        self.protocol("WM_DELETE_WINDOW", lambda arg=self: self.onClose())
 
         itemsBox = ttk.Combobox(self, state="readonly", values=allLockedContent())
         itemsBox.pack(side=TOP, anchor=N, pady=30)
