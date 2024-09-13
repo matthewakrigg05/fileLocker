@@ -30,7 +30,7 @@ class FileLocker(object):
                command=partial(UImethods.removeItemsPopUpBox, self.frame)).grid(
             row=4, column=0, pady=5)
 
-        Label(self.frame, text="Block Apps and Websites").grid(row=1, column=1, pady=5,padx=100)
+        Label(self.frame, text="Block Apps and Websites").grid(row=1, column=1, pady=5, padx=100)
         blockApps = IntVar()
         Checkbutton(self.frame, text="Block Apps", variable=blockApps, onvalue=1, offvalue=0).grid(row=2, column=1)
 
@@ -46,3 +46,22 @@ class FileLocker(object):
                                                           blockSites)).grid(row=6, column=1, pady=50)
 
         self.frame.pack()
+
+    def hide(self):
+        self.root.withdraw()
+
+    def openFrame(self):
+        self.hide()
+        otherFrame = Toplevel()
+        otherFrame.geometry("400x300")
+        otherFrame.title("otherFrame")
+        btn = Button(otherFrame, text="Close", command=partial(self.onCloseOtherFrame, otherFrame))
+        btn.pack()
+
+    def onCloseOtherFrame(self, otherFrame):
+        otherFrame.destroy()
+        self.show()
+
+    def show(self):
+        self.root.update()
+        self.root.deiconify()
