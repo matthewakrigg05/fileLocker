@@ -4,8 +4,9 @@ from tkinter import messagebox
 
 class blockingList:
 
-    def __init__(self, filePath):
-        self.filePath = filePath
+    def __init__(self, fileName):
+        self.filePath = "textFiles/" + fileName
+        self.fileContents = self.getListContents()
 
     def getListContents(self):
         fileContents = []
@@ -28,31 +29,21 @@ class blockingList:
             tkinter.messagebox.showerror("Error", "No input was provided.")
             return Exception
 
-        with open(self.filePath, 'r+') as f:
-            txt = f.readlines()
-
-            for line in txt:
-                if fileToAdd.get() in line:
-                    itemAlreadyInFile = True
-                    break
-                else:
-                    itemAlreadyInFile = False
-
-            if itemAlreadyInFile:
-                tkinter.messagebox.showerror("Error", "This item is already in this file!")
-            else:
+        if fileToAdd in self.fileContents:
+            tkinter.messagebox.showerror("Error", "This item is already in this file!")
+        else:
+            with open(self.filePath, "r+") as f:
                 f.write(fileToAdd.get() + "\n")
                 tkinter.messagebox.showinfo("Item Added", "Your item was successfully added to the correct file!")
 
     def removeFromList(self, fileToRemove):
+        removed = False
 
-        with open(self.filePath, "r+") as file:
-            lines = file.readlines()
-            file.seek(0)
-            for line in lines:
-                if line.strip("\n") != fileToRemove.get():
-                    file.write(line)
-            file.truncate()
+        for item in self.fileContents:
+            if item != fileToRemove.get():
+                with open(self.filePath, "r+") as f:
+                    f.write(item + "\n")
+            f.truncate()
             removed = True
 
         if removed:
