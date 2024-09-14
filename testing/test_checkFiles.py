@@ -4,10 +4,10 @@ import checkFiles
 
 class Test(TestCase):
     def test_checkForTxt(self):
-        if not checkFiles.checkForTxt():
-            print("File exists")
+        if not checkFiles.checkTxtFiles():
+            print("Files exist")
         else:
-            print("File created")
+            print("Files created")
 
     def test_checkIfProcessRunning(self):
         self.fail()

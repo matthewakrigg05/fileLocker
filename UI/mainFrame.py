@@ -9,7 +9,7 @@ from UI.viewItemsFrame import viewItemsFrame
 from block import validTimeToBlock
 
 
-class FileLocker(object):
+class FileLocker:
 
     def __init__(self, parent):
         self.root = parent
@@ -33,8 +33,8 @@ class FileLocker(object):
             pady=5)
 
         Button(self.frame, text="Remove Items from lists",
-               command= self.openRemoveFrame).grid(
-            row=4, column=0, pady=5)
+               command=self.openRemoveFrame).grid(
+               row=4, column=0, pady=5)
 
         Label(self.frame, text="Block Apps and Websites").grid(row=1, column=1, pady=5, padx=100)
         blockApps = IntVar()
