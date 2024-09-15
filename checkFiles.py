@@ -2,13 +2,7 @@ import os
 
 
 def checkTxtFiles():
-    if not os.path.exists('textFiles/lockedApps.txt'):
-        with open('textFiles/lockedApps.txt') as f:
-            f.close()
-
-    if not os.path.exists('textFiles/lockedDomains.txt'):
-        with open('textFiles/lockedDomains.txt', 'w') as f:
-            f.close()
+    return os.listdir("textFiles")
 
 
 def allLockedContent():
