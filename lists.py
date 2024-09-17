@@ -43,8 +43,9 @@ class blockingList:
             if item != fileToRemove.get():
                 with open(self.filePath, "r+") as f:
                     f.write(item + "\n")
-            f.truncate()
-            removed = True
+            else:
+                f.truncate()
+                removed = True
 
         if removed:
             tkinter.messagebox.showinfo("Success", "Your chosen item was successfully removed from your list!")
