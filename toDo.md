@@ -4,4 +4,4 @@ Some more ideas I intend to add:
  - allow to enable time periods to block things eg during work hours?
  - see if i can change the way the app asks for admin perms
  - amend UI elements to work with the new lists class
- - make it possible to get rid of the checkfiles and manipulate list files
+ - figure out how to choose what lists to block, how to add multiple and how to block items correctly

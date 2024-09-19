@@ -1,6 +1,3 @@
-import os
-
-
 def allLockedContent():
     return lockedAppsContent() + lockedDomainsContent()
 
