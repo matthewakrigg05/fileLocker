@@ -2,10 +2,7 @@ import os
 from functools import partial
 from tkinter import *
 from tkinter import ttk
-
-from checkFiles import allLockedContent
 from lists import blockingList
-from manipulateList import removeItem
 
 
 class removeItemsFrame(Toplevel):

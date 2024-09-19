@@ -37,8 +37,6 @@ class blockingList:
 
     def removeFromList(self, fileToRemove, frame):
         removed = False
-        print(self.getListContents())
-
         with open(self.filePath, "r+") as f:
             lines = f.readlines()
             f.seek(0)
@@ -48,7 +46,6 @@ class blockingList:
             removed = True
             f.truncate()
 
-        print(self.getListContents())
         if removed:
             tkinter.messagebox.showinfo("Success", "Your chosen item was successfully removed from your list!")
             frame.onClose()
