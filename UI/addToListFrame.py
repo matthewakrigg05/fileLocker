@@ -33,5 +33,4 @@ class addToListFrame(Toplevel):
 
     def handleInput(self, file, item):
         f = blockingList(file)
-        f.addToList(item)
-        self.onClose()
+        f.addToList(item, self)

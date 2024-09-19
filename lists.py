@@ -6,7 +6,6 @@ class blockingList:
 
     def __init__(self, fileName):
         self.filePath = "textFiles/" + fileName.get()
-        self.fileContents = self.getListContents()
 
     def getListContents(self):
         fileContents = []
@@ -23,22 +22,23 @@ class blockingList:
         appsFile = open(self.filePath, 'w')
         appsFile.close()
 
-    def addToList(self, fileToAdd):
+    def addToList(self, fileToAdd, frame):
         if not fileToAdd.get():
             tkinter.messagebox.showerror("Error", "No input was provided.")
             return Exception
 
-        if fileToAdd in self.fileContents:
+        if fileToAdd in self.getListContents():
             tkinter.messagebox.showerror("Error", "This item is already in this file!")
         else:
             with open(self.filePath, "a+") as f:
                 f.write(fileToAdd.get() + "\n")
+                frame.onClose()
                 tkinter.messagebox.showinfo("Item Added", "Your item was successfully added to the correct file!")
 
     def removeFromList(self, fileToRemove):
         removed = False
 
-        for item in self.fileContents:
+        for item in self.getListContents():
             if item != fileToRemove.get():
                 with open(self.filePath, "r+") as f:
                     f.write(item + "\n")
