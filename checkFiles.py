@@ -1,10 +1,6 @@
 import os
 
 
-def checkTxtFiles():
-    return os.listdir("textFiles")
-
-
 def allLockedContent():
     return lockedAppsContent() + lockedDomainsContent()
 

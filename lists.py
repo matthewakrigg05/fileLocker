@@ -1,3 +1,4 @@
+import os
 import tkinter
 from tkinter import messagebox
 
@@ -24,7 +25,6 @@ class blockingList:
         appsFile.close()
 
     def addToList(self, fileToAdd):
-
         if not fileToAdd.get():
             tkinter.messagebox.showerror("Error", "No input was provided.")
             return Exception
