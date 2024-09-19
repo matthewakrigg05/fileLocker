@@ -9,7 +9,3 @@ def createNewList(fileName):
         f.close()
     else:
         tkinter.messagebox.showinfo("Error", "This file already exists!")
-
-
-def checkTxtFiles():
-    return os.listdir("textFiles")
