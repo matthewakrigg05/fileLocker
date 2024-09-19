@@ -48,7 +48,7 @@ class FileLocker:
         timeToLock = (Entry(self.frame, textvariable=lockTime))
         timeToLock.grid(row=5, column=1, pady=2)
 
-        Button(self.frame, text="Block!", command=partial(self.checkInputs, lockTime, blockApps,
+        Button(self.frame, text="Block!", command=partial(self.checkUiInputs, lockTime, blockApps,
                                                           blockSites)).grid(row=6, column=1, pady=50)
 
         self.frame.pack()
@@ -85,7 +85,7 @@ class FileLocker:
             file.close()
         self.root.destroy()
 
-    def checkInputs(self, lockTime, blockApps, blockSites):
+    def checkUiInputs(self, lockTime, blockApps, blockSites):
         if blockApps.get() == 0 and blockSites.get == 0:
             tkinter.messagebox.showinfo("Error", "No options chosen to block")
         else:
