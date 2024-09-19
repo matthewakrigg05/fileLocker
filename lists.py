@@ -5,7 +5,7 @@ from tkinter import messagebox
 class blockingList:
 
     def __init__(self, fileName):
-        self.filePath = "textFiles/" + fileName
+        self.filePath = "textFiles/" + fileName.get()
         self.fileContents = self.getListContents()
 
     def getListContents(self):
@@ -31,7 +31,7 @@ class blockingList:
         if fileToAdd in self.fileContents:
             tkinter.messagebox.showerror("Error", "This item is already in this file!")
         else:
-            with open(self.filePath, "r+") as f:
+            with open(self.filePath, "a+") as f:
                 f.write(fileToAdd.get() + "\n")
                 tkinter.messagebox.showinfo("Item Added", "Your item was successfully added to the correct file!")
 

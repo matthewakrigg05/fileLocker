@@ -1,3 +1,4 @@
-Spotify.exe
+spoon.exe
 minecraft.exe
 fortnite.exe
+jazz.exe
