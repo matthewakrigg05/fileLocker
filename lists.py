@@ -35,7 +35,7 @@ class blockingList:
                 frame.onClose()
                 tkinter.messagebox.showinfo("Item Added", "Your item was successfully added to the correct file!")
 
-    def removeFromList(self, fileToRemove):
+    def removeFromList(self, fileToRemove, frame):
         removed = False
 
         for item in self.getListContents():
@@ -48,5 +48,6 @@ class blockingList:
 
         if removed:
             tkinter.messagebox.showinfo("Success", "Your chosen item was successfully removed from your list!")
+            frame.onClose()
         else:
             tkinter.messagebox.showerror("Error", "Item could not be removed")

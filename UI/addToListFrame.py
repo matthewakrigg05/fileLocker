@@ -2,9 +2,7 @@ import os
 from functools import partial
 from tkinter import *
 from tkinter import ttk
-
 from lists import blockingList
-from manipulateList import addToList
 
 
 class addToListFrame(Toplevel):
