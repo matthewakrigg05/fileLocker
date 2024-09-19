@@ -5,7 +5,7 @@ from tkinter import messagebox
 class blockingList:
 
     def __init__(self, fileName):
-        self.filePath = "textFiles/" + fileName.get()
+        self.filePath = "textFiles/" + fileName
 
     def getListContents(self):
         fileContents = []
@@ -37,15 +37,18 @@ class blockingList:
 
     def removeFromList(self, fileToRemove, frame):
         removed = False
+        print(self.getListContents())
 
-        for item in self.getListContents():
-            if item != fileToRemove.get():
-                with open(self.filePath, "r+") as f:
-                    f.write(item + "\n")
-            else:
-                f.truncate()
-                removed = True
+        with open(self.filePath, "r+") as f:
+            lines = f.readlines()
+            f.seek(0)
+            for item in lines:
+                if item.strip("\n") != fileToRemove:
+                    f.write(item)
+            removed = True
+            f.truncate()
 
+        print(self.getListContents())
         if removed:
             tkinter.messagebox.showinfo("Success", "Your chosen item was successfully removed from your list!")
             frame.onClose()
