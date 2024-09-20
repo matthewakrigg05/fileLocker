@@ -96,3 +96,6 @@ class runBlockFrame(Toplevel):
         if timeGiven == -1:
             timeNow.set('00:00')
             tkinter.messagebox.showinfo("Complete!", "Your timer is completed! Good Work!")
+
+        self.destroy()
+        self.original_frame.show()
