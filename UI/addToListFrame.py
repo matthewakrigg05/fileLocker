@@ -15,7 +15,7 @@ class addToListFrame(Toplevel):
         self.resizable(False, False)
         self.protocol("WM_DELETE_WINDOW", lambda arg=self: self.onClose())
 
-        itemsBox = ttk.Combobox(self, state="readonly", values=os.listdir("./textFiles"))
+        itemsBox = ttk.Combobox(self, state="readonly", values=os.listdir("./savedLists"))
         itemsBox.pack(side=TOP, anchor=N)
 
         itemToAdd = StringVar()

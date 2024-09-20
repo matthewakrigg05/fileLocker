@@ -5,7 +5,7 @@ from tkinter import messagebox
 class blockingList:
 
     def __init__(self, fileName):
-        self.filePath = "textFiles/" + fileName
+        self.filePath = "savedLists/" + fileName
 
     def getListContents(self):
         fileContents = []

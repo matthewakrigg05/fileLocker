@@ -9,7 +9,7 @@ from block import blockWebsites, closeAppIfDetected, unblockWebsites
 
 class runBlockFrame(Toplevel):
 
-    def __init__(self, mainFrame, lockTime, blockApps, blockSites):
+    def __init__(self, mainFrame, lockTime, toBlock):
         super().__init__()
         self.original_frame = mainFrame
         self.geometry("300x150")
@@ -18,8 +18,7 @@ class runBlockFrame(Toplevel):
         self.protocol("WM_DELETE_WINDOW", lambda arg=self: self.onClose())
 
         lockTime = lockTime.get() * 60
-        blockApps = blockApps.get()
-        blockSites = blockSites.get()
+        toBlock = toBlock.get()
         timeNow = StringVar()
         unlockedEarly = BooleanVar()
 
@@ -30,7 +29,7 @@ class runBlockFrame(Toplevel):
                                     command=partial(unblockEarly, unlockedEarly))
         unblockEarlyButton.pack(side=BOTTOM, anchor=S, pady=20)
 
-        self.runBlock(lockTime, blockApps, blockSites, unlockedEarly, timeNow)
+        self.runBlock(lockTime, toBlock, unlockedEarly, timeNow)
 
     def onClose(self):
         with open("C:\\Windows\\System32\\drivers\\etc\\hosts", 'w') as file:
@@ -38,24 +37,37 @@ class runBlockFrame(Toplevel):
         self.destroy()
         self.original_frame.show()
 
-    def runBlock(self, timeGiven, apps, websites, unlockedEarly, timeNow):
-        if websites == 1 and apps == 1:
-            blockWebsites()
+    def runBlock(self, timeGiven, toBlock, unlockedEarly, timeNow):
+        toBlock = "savedLists/" + toBlock
+        apps = []
+        sites = []
+
+        with open(toBlock, "r") as file:
+            lines = file.readlines()
+
+            for line in lines:
+                if ".exe" in line:
+                    apps.append(line)
+                else:
+                    sites.append(line)
+
+        if len(sites) != 0 and len(apps) != 0:
+            blockWebsites(sites)
             while timeGiven > -1:
                 if not unlockedEarly.get():
                     mins, secs = divmod(timeGiven, 60)
                     timeNow.set('{:02d}:{:02d}'.format(mins, secs))
                     time.sleep(1)
                     self.update()
-                    closeAppIfDetected()
+                    closeAppIfDetected(apps)
                     timeGiven -= 1
                 else:
                     self.onClose()
                     break
             unblockWebsites()
 
-        elif websites == 1 and apps == 0:
-            blockWebsites()
+        elif len(sites) != 0 and len(apps) == 0:
+            blockWebsites(sites)
             while timeGiven > -1:
                 if not unlockedEarly.get():
                     mins, secs = divmod(timeGiven, 60)
@@ -75,7 +87,7 @@ class runBlockFrame(Toplevel):
                     timeNow.set('{:02d}:{:02d}'.format(mins, secs))
                     time.sleep(1)
                     self.update()
-                    closeAppIfDetected()
+                    closeAppIfDetected(apps)
                     timeGiven -= 1
                 else:
                     self.onClose()

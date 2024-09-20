@@ -1,6 +1,7 @@
+import os
 import tkinter
 from tkinter import *
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 from functools import partial
 from UI.addToListFrame import addToListFrame
 from UI.removeItemsFrame import removeItemsFrame
@@ -17,7 +18,6 @@ class FileLocker:
         self.root.protocol("WM_DELETE_WINDOW", lambda arg=self.root: self.onClose())
         self.root.geometry("640x360")
         self.root.resizable(False, False)
-
         self.frame = Frame(parent)
 
         Label(self.frame, text="File Locker", justify=CENTER).grid(row=0, columnspan=2, sticky=N)
@@ -36,29 +36,26 @@ class FileLocker:
                command=self.openRemoveFrame).grid(
                row=4, column=0, pady=5)
 
-        Label(self.frame, text="Block Apps and Websites").grid(row=1, column=1, pady=5, padx=100)
-        blockApps = IntVar()
-        Checkbutton(self.frame, text="Block Apps", variable=blockApps, onvalue=1, offvalue=0).grid(row=2, column=1)
+        Label(self.frame, text="List that you wish to block:").grid(row=1, column=1, pady=5, padx=100)
 
-        blockSites = IntVar()
-        Checkbutton(self.frame, text="Block Websites", variable=blockSites, onvalue=1, offvalue=0).grid(row=3, column=1)
+        itemsBox = ttk.Combobox(self.frame, state="readonly", values=os.listdir("./savedLists"))
+        itemsBox.grid(row=2, column=1, pady=2)
 
-        Label(self.frame, text="Amount of time you wish to block in minutes:").grid(row=4, column=1)
+        Label(self.frame, text="Amount of time you wish to block in minutes:").grid(row=3, column=1)
         lockTime = IntVar()
         timeToLock = (Entry(self.frame, textvariable=lockTime))
-        timeToLock.grid(row=5, column=1, pady=2)
+        timeToLock.grid(row=4, column=1, pady=2)
 
-        Button(self.frame, text="Block!", command=partial(self.checkBlockingInputs, lockTime, blockApps,
-                                                          blockSites)).grid(row=6, column=1, pady=50)
+        Button(self.frame, text="Block!", command=partial(self.checkBlockingInputs, lockTime, itemsBox)).grid(row=5, column=1, pady=50)
 
         self.frame.pack()
 
     def hide(self):
         self.root.withdraw()
 
-    def openBlockFrame(self, lockTime, blockApps, blockSites):
+    def openBlockFrame(self, lockTime, toBlock):
         self.hide()
-        runBlockFrame(self, lockTime, blockApps, blockSites)
+        runBlockFrame(self, lockTime, toBlock)
 
     def openAddFrame(self):
         self.hide()
@@ -85,13 +82,13 @@ class FileLocker:
             file.close()
         self.root.destroy()
 
-    def checkBlockingInputs(self, lockTime, blockApps, blockSites):
-        if blockApps.get() == 0 and blockSites.get == 0:
+    def checkBlockingInputs(self, lockTime, toBlock):
+        if toBlock.get() == 0:
             tkinter.messagebox.showinfo("Error", "No options chosen to block")
         else:
             if validTimeToBlock(lockTime.get()):
                 toContinue = tkinter.messagebox.askyesno("FileLocker", "Are you sure you wish to continue?")
                 if toContinue:
-                    self.openBlockFrame(lockTime, blockApps, blockSites)
+                    self.openBlockFrame(lockTime, toBlock)
             else:
                 tkinter.messagebox.showerror("Error", "Invalid time input!")
