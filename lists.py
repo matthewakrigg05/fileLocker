@@ -1,3 +1,4 @@
+import os
 import tkinter
 from tkinter import messagebox
 
@@ -5,7 +6,8 @@ from tkinter import messagebox
 class blockingList:
 
     def __init__(self, fileName):
-        self.filePath = "savedLists/" + fileName
+        self.fileName = fileName
+        self.filePath = "./savedLists/" + fileName + ".txt"
 
     def getListContents(self):
         fileContents = []
@@ -51,3 +53,11 @@ class blockingList:
             frame.onClose()
         else:
             tkinter.messagebox.showerror("Error", "Item could not be removed")
+
+    def createNewList(self):
+        if not os.path.exists(self.filePath):
+            f = open(self.filePath, "w")
+            f.close()
+            tkinter.messagebox.showinfo("Success", "Your file has been created!")
+        else:
+            tkinter.messagebox.showinfo("Error", "This file already exists!")
