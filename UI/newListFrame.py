@@ -17,7 +17,7 @@ class newListFrame(Toplevel):
         label.pack(side=TOP, anchor=N)
 
         fileName = StringVar()
-        entry = Entry(self, width=10, textvariable=fileName)
+        entry = Entry(self, width=25, textvariable=fileName)
         entry.pack(pady=25, side=TOP)
 
         button = Button(self, text="Create file!", command=partial(self.handleInput, fileName))

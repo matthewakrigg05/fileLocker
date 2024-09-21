@@ -61,3 +61,10 @@ class blockingList:
             tkinter.messagebox.showinfo("Success", "Your file has been created!")
         else:
             tkinter.messagebox.showinfo("Error", "This file already exists!")
+
+    def removeList(self):
+        if os.path.exists(self.filePath):
+            os.remove(self.filePath)
+            tkinter.messagebox.showinfo("Success", "Your file has been removed!")
+        else:
+            tkinter.messagebox.showinfo("Error", "This file could not be removed")

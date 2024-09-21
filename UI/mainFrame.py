@@ -5,6 +5,7 @@ from tkinter import messagebox, ttk
 from functools import partial
 from UI.addToListFrame import addToListFrame
 from UI.removeItemsFrame import removeItemsFrame
+from UI.removeListFrame import removeListFrame
 from UI.runBlockFrame import runBlockFrame
 from UI.viewItemsFrame import viewItemsFrame
 from UI.newListFrame import newListFrame
@@ -41,6 +42,10 @@ class FileLocker:
                                 command=self.openNewFileFrame).grid(
                                 row=5, column=0, pady=5)
 
+        Button(self.frame, text="Remove a list",
+               command=self.openRemoveFileFrame).grid(
+            row=6, column=0, pady=5)
+
         Label(self.frame, text="List that you wish to block:").grid(row=1, column=1, pady=5, padx=100)
 
         itemsBox = ttk.Combobox(self.frame, state="readonly", values=os.listdir("./savedLists"))
@@ -73,6 +78,10 @@ class FileLocker:
     def openNewFileFrame(self):
         self.hide()
         newListFrame(self)
+
+    def openRemoveFileFrame(self):
+        self.hide()
+        removeListFrame(self)
 
     def openViewFrame(self):
         self.hide()
