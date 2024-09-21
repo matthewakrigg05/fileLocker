@@ -5,8 +5,10 @@ from tkinter import messagebox, ttk
 from functools import partial
 from UI.addToListFrame import addToListFrame
 from UI.removeItemsFrame import removeItemsFrame
+from UI.removeListFrame import removeListFrame
 from UI.runBlockFrame import runBlockFrame
 from UI.viewItemsFrame import viewItemsFrame
+from UI.newListFrame import newListFrame
 from block import validTimeToBlock
 
 
@@ -36,6 +38,14 @@ class FileLocker:
                command=self.openRemoveFrame).grid(
                row=4, column=0, pady=5)
 
+        Button(self.frame, text="Create a new list",
+                                command=self.openNewFileFrame).grid(
+                                row=5, column=0, pady=5)
+
+        Button(self.frame, text="Remove a list",
+               command=self.openRemoveFileFrame).grid(
+            row=6, column=0, pady=5)
+
         Label(self.frame, text="List that you wish to block:").grid(row=1, column=1, pady=5, padx=100)
 
         itemsBox = ttk.Combobox(self.frame, state="readonly", values=os.listdir("./savedLists"))
@@ -46,7 +56,7 @@ class FileLocker:
         timeToLock = (Entry(self.frame, textvariable=lockTime))
         timeToLock.grid(row=4, column=1, pady=2)
 
-        Button(self.frame, text="Block!", command=partial(self.checkBlockingInputs, lockTime, itemsBox)).grid(row=5, column=1, pady=50)
+        Button(self.frame, text="Block!", command=partial(self.checkBlockingInputs, lockTime, itemsBox)).grid(row=10, column=1, pady=50)
 
         self.frame.pack()
 
@@ -64,6 +74,14 @@ class FileLocker:
     def openRemoveFrame(self):
         self.hide()
         removeItemsFrame(self)
+
+    def openNewFileFrame(self):
+        self.hide()
+        newListFrame(self)
+
+    def openRemoveFileFrame(self):
+        self.hide()
+        removeListFrame(self)
 
     def openViewFrame(self):
         self.hide()
