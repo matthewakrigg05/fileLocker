@@ -20,15 +20,14 @@ class viewItemsFrame(Toplevel):
             label = Label(self, text="You currently have no lists.")
             label.pack(pady=5, side=TOP, anchor=NW)
         else:
-            item = StringVar()
+            self.item = StringVar()
+            self.combo = ttk.Combobox(self, state="readonly", values=os.listdir("./savedLists"), textvariable=self.item)
+            self.combo.bind("<<ComboboxSelected>>", self.onChange)
 
-            combo = ttk.Combobox(self, state="readonly", values=os.listdir("./savedLists"), textvariable=item,
-                                 postcommand=partial(self.onChange, item))
+            self.combo.pack(side=TOP, anchor=N)
 
-            combo.pack(side=TOP, anchor=N)
-
-    def onChange(self, combo):
-        selection = combo.get()
+    def onChange(self, event):
+        selection = self.combo.get()
         l = blockingList(selection)
 
         label = Label(self,
