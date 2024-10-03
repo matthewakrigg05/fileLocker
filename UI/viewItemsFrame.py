@@ -1,5 +1,7 @@
 import os
+from functools import partial
 from tkinter import *
+from tkinter import ttk
 
 from lists import blockingList
 
@@ -18,14 +20,22 @@ class viewItemsFrame(Toplevel):
             label = Label(self, text="You currently have no lists.")
             label.pack(pady=5, side=TOP, anchor=NW)
         else:
-            for file in os.listdir("./savedLists"):
-                l = blockingList(file)
+            item = StringVar()
 
-                label = Label(self,
-                              text=("In " + file + " there is: " + l.getListContents()),
-                              wraplength=250,
-                              justify=LEFT)
-                label.pack(side=TOP, anchor=W)
+            combo = ttk.Combobox(self, state="readonly", values=os.listdir("./savedLists"), textvariable=item,
+                                 postcommand=partial(self.onChange, item))
+
+            combo.pack(side=TOP, anchor=N)
+
+    def onChange(self, combo):
+        selection = combo.get()
+        l = blockingList(selection)
+
+        label = Label(self,
+                      text=("In " + selection + " there is: " + l.getListContents()),
+                      wraplength=250,
+                      justify=LEFT)
+        label.pack(side=TOP, anchor=W)
 
     def onClose(self):
         self.destroy()
