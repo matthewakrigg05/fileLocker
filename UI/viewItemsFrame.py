@@ -1,8 +1,6 @@
 import os
-from functools import partial
 from tkinter import *
 from tkinter import ttk
-
 from lists import blockingList
 
 
@@ -25,10 +23,10 @@ class viewItemsFrame(Toplevel):
         else:
             self.item = StringVar()
             self.combo = ttk.Combobox(self, state="readonly", values=os.listdir("./savedLists"), textvariable=self.item)
-            self.combo.bind("<<ComboboxSelected>>", partial(self.onChange, self.label))
+            self.combo.bind("<<ComboboxSelected>>", self.onChange)
             self.combo.pack(side=TOP, anchor=N, pady=5)
 
-    def onChange(self, event, label):
+    def onChange(self, event):
         self.label.pack_forget()
         selection = self.combo.get()
         contentList = blockingList(selection)
@@ -37,7 +35,7 @@ class viewItemsFrame(Toplevel):
                            text=("In " + selection + " there is: " + contentList.getListContents()),
                            wraplength=250,
                            justify=LEFT)
-        self.label.pack(side=BOTTOM, anchor=W)
+        self.label.pack(side=BOTTOM, anchor=CENTER, pady=20)
 
     def onClose(self):
         self.destroy()
