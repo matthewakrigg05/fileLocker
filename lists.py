@@ -19,7 +19,7 @@ class blockingList:
                 fileContents.append(line.strip("\n"))
 
         if not fileContents:
-            return "This file is empty"
+            return False
         else:
             return ", ".join(fileContents).replace('\n', '')
 

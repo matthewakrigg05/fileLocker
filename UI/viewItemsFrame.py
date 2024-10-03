@@ -14,8 +14,8 @@ class viewItemsFrame(Toplevel):
         self.resizable(False, False)
         self.protocol("WM_DELETE_WINDOW", lambda arg=self: self.onClose())
 
-        self.label = Label(self, text="Please select a list that you wish to look at.")
-        self.label.pack(side=TOP, anchor=N)
+        self.titleLabel = Label(self, text="Please select a list that you wish to look at.")
+        self.titleLabel.pack(side=TOP, anchor=N)
 
         if len(os.listdir("./savedLists")) == 0:
             self.label = Label(self, text="You currently have no lists.")
@@ -26,17 +26,27 @@ class viewItemsFrame(Toplevel):
             self.combo.bind("<<ComboboxSelected>>", self.onChange)
             self.combo.pack(side=TOP, anchor=N, pady=5)
 
+            self.label = Label(self)
+
     def onChange(self, event):
         self.label.pack_forget()
         selection = self.combo.get()
         contentList = blockingList(selection)
 
-        self.label = Label(self,
-                           text=("In " + selection + " there is: " + contentList.getListContents()),
-                           wraplength=250,
-                           justify=LEFT)
-        self.label.pack(side=BOTTOM, anchor=CENTER, pady=20)
+        if not contentList.getListContents():
+            self.label = Label(self,
+                               text=("In " + selection + " there are currently no items. "),
+                               wraplength=250,
+                               justify=LEFT)
+            self.label.pack(side=TOP, anchor=CENTER, pady=10)
+        else:
+            self.label = Label(self,
+                               text=("In " + selection + " there is: " + contentList.getListContents()),
+                               wraplength=250,
+                               justify=LEFT)
+            self.label.pack(side=TOP, anchor=CENTER, pady=10)
 
     def onClose(self):
         self.destroy()
         self.original_frame.show()
+
