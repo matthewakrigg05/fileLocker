@@ -16,8 +16,14 @@ class removeListFrame(Toplevel):
         self.resizable(False, False)
         self.protocol("WM_DELETE_WINDOW", lambda arg=self: self.onClose())
 
+        listPrompt = Label(self, text="Please select a list that you would like to delete:", justify=CENTER)
+        listPrompt.pack(side=TOP, anchor=N)
+
         itemsBox = ttk.Combobox(self, state="readonly", values=os.listdir("./savedLists"))
         itemsBox.pack(side=TOP, anchor=N)
+
+        warningPrompt = Label(self, text="Once a list is deleted it CANNOT be recovered!", justify=CENTER)
+        warningPrompt.pack(side=TOP, anchor=N)
 
         removeButton = Button(self, text="Remove List", command=partial(self.handleRemoveInput, itemsBox))
         removeButton.pack(side=BOTTOM, anchor=S, pady=50)
